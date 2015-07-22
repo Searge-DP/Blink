@@ -1,0 +1,16 @@
+[
+{
+  "modid": "blink",
+  "name": "Blink",
+  "description": "A mod about teleporting",
+  "version": "${1.4}",
+  "mcversion": "${1.7.10}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["EwyBoy"],
+  "credits": "Me!<3",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
