@@ -1,36 +1,26 @@
     package com.ewyboy.blink.Items;
 
-    import com.ewyboy.blink.Loaders.CreativeTabLoader;
     import com.ewyboy.blink.Networking.ClientProxy;
-    import com.ewyboy.blink.Textures.TexturePath;
-    import com.ewyboy.blink.Utillity.StringMap;
-    import cpw.mods.fml.relauncher.Side;
-    import cpw.mods.fml.relauncher.SideOnly;
-    import net.minecraft.client.renderer.texture.IIconRegister;
-    import net.minecraft.entity.player.EntityPlayer;
-    import net.minecraft.item.Item;
-    import net.minecraft.item.ItemStack;
-    import net.minecraft.util.IIcon;
+import com.ewyboy.blink.Textures.TexturePath;
+import com.ewyboy.blink.Utillity.StringMap;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.IIcon;
 
-    import java.util.List;
+import java.util.List;
 
-    public class ItemEnderCapsule extends Item {
-
-        public ItemEnderCapsule() {
-            super();
-            setMaxStackSize(64);
-            setCreativeTab(CreativeTabLoader.BlinkItemTab);
-        }
+    public class ItemEnderCapsule extends BaseItem {
 
         @Override
         @SideOnly(Side.CLIENT)
-        public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean useExtraInformation)
-        {
-            info.add("Press shift to show info");
-
-            if (ClientProxy.shiftPressed())
-            {
+        public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean useExtraInformation) {
+            if (ClientProxy.shiftPressed()) {
                 info.add("A crafting component for the swapper");
+            } else {
+                info.add("Press shift to show info");
             }
         }
 

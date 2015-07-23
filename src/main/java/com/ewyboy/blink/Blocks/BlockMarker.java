@@ -1,6 +1,5 @@
 package com.ewyboy.blink.Blocks;
 
-import com.ewyboy.blink.Loaders.CreativeTabLoader;
 import com.ewyboy.blink.Textures.TexturePath;
 import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
@@ -12,11 +11,10 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-public class BlockMarker extends Block {
+public class BlockMarker extends BaseBlock {
 
     public BlockMarker() {
         super(Material.circuits);
-        setCreativeTab(CreativeTabLoader.BlinkBlockTab);
         setLightLevel(0.75F);
         setLightOpacity(1);
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F);

@@ -11,7 +11,6 @@ import net.minecraft.world.World;
 public class GuiHandler implements IGuiHandler {
 
     public GuiHandler() {
-        //NetworkRegistry.instance().registerGuiHandler(Blink.instance, this);
         NetworkRegistry.INSTANCE.registerGuiHandler(Blink.instance, this);
     }
 

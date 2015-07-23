@@ -40,13 +40,11 @@ public class ItemRodOfAges extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean useExtraInformation)
-    {
-        info.add("Shift to show info");
-
-        if (ClientProxy.shiftPressed())
-        {
+    public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean useExtraInformation) {
+        if (ClientProxy.shiftPressed()) {
             info.add("Work in progress");
+        } else {
+            info.add("Shift to show info");
         }
     }
 

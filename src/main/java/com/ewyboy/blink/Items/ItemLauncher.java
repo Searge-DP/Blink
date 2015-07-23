@@ -1,6 +1,5 @@
 package com.ewyboy.blink.Items;
 
-import com.ewyboy.blink.Loaders.CreativeTabLoader;
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Textures.TexturePath;
 import com.ewyboy.blink.Utillity.StringMap;
@@ -17,12 +16,7 @@ import net.minecraft.world.World;
 
 import java.util.List;
 
-public class ItemLauncher extends Item {
-
-    public ItemLauncher() {
-        super();
-        setCreativeTab(CreativeTabLoader.BlinkItemTab);
-    }
+public class ItemLauncher extends BaseItem {
 
     private void spawnEffectsForClock(World world, EntityPlayer player, double x, double y, double z) {
 
