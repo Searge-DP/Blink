@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -30,6 +31,8 @@ public class BlockSwapper extends BaseBlock {
         return true;
     }*/
 
+    private int defaultFlag = 3;
+
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         ArrayList<String> test = new ArrayList<String>();
@@ -37,17 +40,19 @@ public class BlockSwapper extends BaseBlock {
 
         if(!world.isRemote) {
             if(world.isBlockIndirectlyGettingPowered(x, y, z)) {
-                if     (world.getBlock(x - 2, y, z) == this){ test.add(posToString(x - 2, y, z));}
-                else if(world.getBlock(x + 2, y, z) == this){ test.add(posToString       (x+2, y, z));}
-                else if(world.getBlock(x, y, z - 2) == this){ test.add(posToString       (x, y, z-2));}
-                else if(world.getBlock(x, y, z + 2) == this){ test.add(posToString       (x, y, z+2));}
+                for(int i = 2; i<5; i++) {
+                    if     (world.getBlock(x - i, y, z) == this){ test.add(posToString(x-i, y, z));}
+                    else if(world.getBlock(x + i, y, z) == this){ test.add(posToString(x+i, y, z));}
+                    else if(world.getBlock(x, y, z - i) == this){ test.add(posToString(x, y, z-i));}
+                    else if(world.getBlock(x, y, z + i) == this){ test.add(posToString(x, y, z+i));}
 
-                else if(world.getBlock(x + 2, y, z + 2) == this){ test.add(posToString   (x+2, y, z+2));}
-                else if(world.getBlock(x - 2, y, z + 2) == this){  test.add(posToString  (x-2, y, z+2));}
-                else if(world.getBlock(x + 2, y, z - 2) == this){  test.add(posToString  (x+2, y, z-2));}
-                else if(world.getBlock(x - 2, y, z - 2) == this){  test.add(posToString  (x-2, y, z-2));}
+                    else if(world.getBlock(x+i, y, z+i) == this){ test.add(posToString(x+i, y, z+i));}
+                    else if(world.getBlock(x-i, y, z+i) == this){ test.add(posToString(x-i, y, z+i));}
+                    else if(world.getBlock(x+i, y, z-i) == this){ test.add(posToString(x+i, y, z-i));}
+                    else if(world.getBlock(x-i, y, z-i) == this){ test.add(posToString(x-i, y, z-i));}
 
-                else if(world.getBlock(x,y,z) == this) { test.add(posToString(x,y,z));}
+                    else if(world.getBlock(x,y,z) == this) { test.add(posToString(x,y,z));}
+                }
 
                 int selection = random.nextInt(test.size());
                 String posString = test.get(selection);
@@ -56,14 +61,16 @@ public class BlockSwapper extends BaseBlock {
                 int iX = Integer.parseInt(X), iY = Integer.parseInt(Y), iZ = Integer.parseInt(Z);
 
                 Block block1 = world.getBlock(x,y+1,z);
+                int block1meta = world.getBlockMetadata(x,y+1,z);
                 Block block2 = world.getBlock(iX,iY+1,iZ);
+                int block2meta = world.getBlockMetadata(iX,iY+1,iZ);
 
-                world.setBlock(x,y+1,z,block2);
-                world.setBlock(iX,iY+1,iZ,block1);
+                world.setBlock(x,y+1,z,block2, block2meta, defaultFlag);
+                world.setBlock(iX,iY+1,iZ,block1, block1meta, defaultFlag);
 
                 for (int i = 0; i<5000; i++) {
-                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,1.0D,1.0D,1.0D);
-                    ParticleEngine.spawnParticleAtBlock("portal",world, iX,iY+1,iZ,3.0D,3.0D,3.0D);
+                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+2,z,1.0D,1.0D,1.0D);
+                    ParticleEngine.spawnParticleAtBlock("portal",world, iX,iY+2,iZ,3.0D,3.0D,3.0D);
                 }
                 ParticleEngine.playSound("mob.endermen.portal", world, player, x, y, z, 0.5F, 3.0F);
             }
