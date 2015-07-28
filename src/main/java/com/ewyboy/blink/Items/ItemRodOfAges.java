@@ -9,31 +9,41 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-public class ItemRodOfAges extends Item {
+public class ItemRodOfAges extends BaseItem {
 
-    public ItemRodOfAges() {
-        super();
-        setMaxStackSize(1);
-        setCreativeTab(CreativeTabLoader.BlinkItemTab);
+    public String posToString(int x, int y, int z) {
+        return x + " " + y + " " + z;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hit) {
+        ArrayList<String> test = new ArrayList<String>();
+        Random random = new Random();
+
         if (player.isSneaking() == true) {
             if (world.isAirBlock(x, y+1 ,z) && (world.isAirBlock(x, y+2 ,z))) {
                 world.setBlock(x, y + 1 , z , BlockLoader.Marker);
+                if (world.getBlock(x, y+1, z) == BlockLoader.Marker){ test.add(posToString(x, y+1, z));}
             }
             if (world.getBlock(x, y, z) == BlockLoader.Marker) {
                 world.setBlockToAir(x,y+1,z);
             }
+        } else {
+            int selection = random.nextInt(test.size());
+            String posString = test.get(selection);
+            String[] POS = posString.split(" ");
+            String X = POS[0], Y = POS[1], Z = POS[2];
+            int iX = Integer.parseInt(X), iY = Integer.parseInt(Y), iZ = Integer.parseInt(Z);
+            player.setPositionAndUpdate(iX + 0.5, iY + 1.5, iZ + 0.5);
         }
         return true;
     }

@@ -37,10 +37,8 @@ public class BaseBlock extends Block {
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
         super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
         if (world.getTileEntity(x,y,z) instanceof TileEntity || world.getBlock(x,y,z) instanceof Block) {
-
             int direction = 0;
             int facing = MathHelper.floor_double((double) (entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-
             if(facing == 0) {
                 direction = ForgeDirection.NORTH.ordinal();
                     Logger.info(ForgeDirection.NORTH.name());
