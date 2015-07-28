@@ -38,13 +38,15 @@ public class BlockSwapper extends BaseBlock {
         ArrayList<String> test = new ArrayList<String>();
         Random random = new Random();
 
+
+
         if(!world.isRemote) {
             if(world.isBlockIndirectlyGettingPowered(x, y, z)) {
                 for(int i = 2; i<5; i++) {
-                    if     (world.getBlock(x - i, y, z) == this){ test.add(posToString(x-i, y, z));}
-                    else if(world.getBlock(x + i, y, z) == this){ test.add(posToString(x+i, y, z));}
-                    else if(world.getBlock(x, y, z - i) == this){ test.add(posToString(x, y, z-i));}
-                    else if(world.getBlock(x, y, z + i) == this){ test.add(posToString(x, y, z+i));}
+                    if     (world.getBlock(x-i, y, z) == this){ test.add(posToString(x-i, y, z));}
+                    else if(world.getBlock(x+i, y, z) == this){ test.add(posToString(x+i, y, z));}
+                    else if(world.getBlock(x, y, z-i) == this){ test.add(posToString(x, y, z-i));}
+                    else if(world.getBlock(x, y, z+i) == this){ test.add(posToString(x, y, z+i));}
 
                     else if(world.getBlock(x+i, y, z+i) == this){ test.add(posToString(x+i, y, z+i));}
                     else if(world.getBlock(x-i, y, z+i) == this){ test.add(posToString(x-i, y, z+i));}
@@ -67,13 +69,20 @@ public class BlockSwapper extends BaseBlock {
 
                 world.setBlock(x,y+1,z,block2, block2meta, defaultFlag);
                 world.setBlock(iX,iY+1,iZ,block1, block1meta, defaultFlag);
-
-                for (int i = 0; i<5000; i++) {
-                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+2,z,1.0D,1.0D,1.0D);
-                    ParticleEngine.spawnParticleAtBlock("portal",world, iX,iY+2,iZ,3.0D,3.0D,3.0D);
-                }
-                ParticleEngine.playSound("mob.endermen.portal", world, player, x, y, z, 0.5F, 3.0F);
             }
+        }
+        ParticleEngine.playSound("mob.endermen.portal", world, player, x, y, z, 0.5F, 3.0F);
+        double fx = 1.5D;
+        for (int i = 0; i<1000; i++) {
+            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,fx,fx,0);
+            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,0,fx,fx);
+            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,-fx,fx,0);
+            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,0,fx,-fx);
+            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,0,fx,-fx);
+            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,fx,fx,-fx);
+            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,-fx,fx,fx);
+            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,-fx,fx,-fx);
+            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,fx,fx,fx);
         }
         return true;
     }

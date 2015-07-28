@@ -16,7 +16,7 @@ public class ParticleEngine {
     }
 
     public static void spawnParticleAtBlock(String particleFX, World world, double x, double y, double z, double vX, double vY, double vZ) {
-        world.spawnParticle(particleFX, x,y,z, Math.random() * (vX - (vX*(-1)) +(vX*(-1))), Math.random() * (vY - (vY*(-1)) +(vY*(-1))), Math.random() * (vZ - (vZ*(-1)) +(vZ*(-1))));
+        world.spawnParticle(particleFX, x + 0.5,y,z + 0.5, Math.random() * (vX - (vX*(-1)) +(vX*(-1))), Math.random() * (vY - (vY*(-1)) +(vY*(-1))), Math.random() * (vZ - (vZ*(-1)) +(vZ*(-1))));
     }
 
     public static void playSound(String soundPath, World world, Entity entity, double x, double y, double z, float volume, float pitch) {
