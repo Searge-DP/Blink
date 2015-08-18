@@ -9,19 +9,24 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
+import java.lang.reflect.Type;
+
 public class RodOfAgesRenderer implements IItemRenderer {
 
     protected RodOfAgesModel model;
 
-    public RodOfAgesRenderer(RodOfAgesModel model) {
-        this.model = new RodOfAgesModel();
+    public RodOfAgesRenderer() {
+        model = new RodOfAgesModel();
     }
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        switch (type) {
-            case EQUIPPED:return true;
-            default:return false;
+        if(type==type.EQUIPPED) {
+            return true;
+        } else if (type == type.EQUIPPED_FIRST_PERSON) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -32,16 +37,18 @@ public class RodOfAgesRenderer implements IItemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        switch (type) {
-            case EQUIPPED: {
-                GL11.glPushMatrix();
-                    GL11.glScalef(-1.0f,-1.0f,1.0f);
-                    Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(StringMap.ID + ":" + "textures/models/RodOfAgesTexture.png"));
-                    this.model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
-                GL11.glPopMatrix();
-            }default:
-                break;
-        }
+        GL11.glPushMatrix();
+        if(type==type.EQUIPPED) {
+            GL11.glScalef(-2.0f,-2.0f,2.0f);
+            GL11.glTranslatef(0.0f,-1.0f,0.0f);
+        } else if (type == type.EQUIPPED_FIRST_PERSON) {
+            GL11.glScalef(-2.0f,-2.0f,2.0f);
+            GL11.glTranslatef(0.0f,-1.0f,0.0f);
+        } else {
 
+        }
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(StringMap.ID + ":" + "textures/models/RodOfAgesTexture.png"));
+        this.model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+        GL11.glPopMatrix();
     }
 }
