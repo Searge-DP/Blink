@@ -96,7 +96,7 @@ public class ItemRodOfAges extends BaseItem {
     public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
         int range = Config.rodOfAgesRange;
         boolean isPlayerInRange = false;
-
+        if(!world.isRemote)
         if(!player.isSneaking()) {
             if(hasNBTSaved(item)) {
                 int x,y,z,dim;
