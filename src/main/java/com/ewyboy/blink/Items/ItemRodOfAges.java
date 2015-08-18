@@ -128,6 +128,7 @@ public class ItemRodOfAges extends BaseItem {
                 if(isPlayerInRange && player.dimension == dim && world.getBlock(x,y,z) == BlockLoader.Marker) {
                     float pitch = (float)Math.random()*(max-min)+min;
                     world.playSoundAtEntity(player,"mob.endermen.portal",1.0f ,pitch);
+                    player.fallDistance = 0;
                     player.setPositionAndUpdate(x+0.5, y+0.05, z+0.5);
                 }
 
