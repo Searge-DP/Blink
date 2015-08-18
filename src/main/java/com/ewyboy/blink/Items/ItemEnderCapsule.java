@@ -1,6 +1,6 @@
-    package com.ewyboy.blink.Items;
+package com.ewyboy.blink.Items;
 
-    import com.ewyboy.blink.Networking.ClientProxy;
+import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Textures.TexturePath;
 import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
@@ -12,17 +12,26 @@ import net.minecraft.util.IIcon;
 
 import java.util.List;
 
-    public class ItemEnderCapsule extends BaseItem {
+public class ItemEnderCapsule extends BaseItem {
 
-        @Override
-        @SideOnly(Side.CLIENT)
-        public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean useExtraInformation) {
-            if (ClientProxy.shiftPressed()) {
-                info.add("A crafting component for the swapper");
-            } else {
-                info.add("Press shift to show info");
-            }
+    public ItemEnderCapsule() {
+        setMaxDamage(10);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean useExtraInformation) {
+        if (ClientProxy.shiftPressed()) {
+            info.add("A crafting component for the swapper");
+        } else {
+            info.add("Press shift to show info");
         }
+    }
+
+    @Override
+    public boolean showDurabilityBar(ItemStack stack) {
+        return true;
+    }
 
     @SideOnly(Side.CLIENT)
     private IIcon EnderCapsuleIcons;

@@ -8,11 +8,11 @@ import net.minecraft.world.World;
 public class ParticleEngine {
 
     public static void spawnParticleAtEntity(String particleFX, World world,EntityItem item, double x, double y, double z,double vX, double vY, double vZ) {
-        world.spawnParticle(particleFX, x = item.posX, y = item.posY, z = item.posZ, Math.random() * (vX - (vX*(-1)) +(vX*(-1))), Math.random() * (vY - (vY*(-1)) +(vY*(-1))), Math.random() * (vZ - (vZ*(-1)) +(vZ*(-1))));
+        world.spawnParticle(particleFX, x = item.posX + 0.5, y = item.posY, z = item.posZ + 0.5, Math.random() * (vX - (vX*(-1)) +(vX*(-1))), Math.random() * (vY - (vY*(-1)) +(vY*(-1))), Math.random() * (vZ - (vZ*(-1)) +(vZ*(-1))));
     }
 
     public static void spawnParticleAtPlayer(String particleFX, World world, EntityPlayer player,double x, double y, double z, double vX, double vY, double vZ) {
-        world.spawnParticle(particleFX, x = player.posX, y = player.posY, z = player.posZ, Math.random() * (vX - (vX*(-1)) +(vX*(-1))), Math.random() * (vY - (vY*(-1)) +(vY*(-1))), Math.random() * (vZ - (vZ*(-1)) +(vZ*(-1))));
+        world.spawnParticle(particleFX, x = player.posX + 0.5, y = player.posY, z = player.posZ + 0.5, Math.random() * (vX - (vX*(-1)) +(vX*(-1))), Math.random() * (vY - (vY*(-1)) +(vY*(-1))), Math.random() * (vZ - (vZ*(-1)) +(vZ*(-1))));
     }
 
     public static void spawnParticleAtBlock(String particleFX, World world, double x, double y, double z, double vX, double vY, double vZ) {

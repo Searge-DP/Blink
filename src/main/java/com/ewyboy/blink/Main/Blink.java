@@ -5,6 +5,7 @@ import com.ewyboy.blink.Loaders.RecipeLoader;
 import com.ewyboy.blink.Interface.GuiHandler;
 import com.ewyboy.blink.Loaders.ItemLoader;
 import com.ewyboy.blink.Networking.CommonProxy;
+import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.StringMap;
 import com.google.common.base.Stopwatch;
@@ -29,6 +30,7 @@ public final class Blink {
     void preInit (FMLPreInitializationEvent event) {
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("PreInitialization started");
+                Config.init(event.getSuggestedConfigurationFile());
                 ItemLoader.loadItems();
                 BlockLoader.loadBlocks();
             Logger.info("PreInitialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms )");
