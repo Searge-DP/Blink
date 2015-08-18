@@ -4,8 +4,10 @@ import com.ewyboy.blink.Textures.TexturePath;
 import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -21,6 +23,21 @@ public class BlockMarker extends BaseBlock {
         this.setBlockBounds(0.0F, 0.0F, 0.0F, 1.0F, 0.0F, 1.0F);
         setBlockUnbreakable();
         setHardness(-1);
+    }
+
+    @Override
+    public boolean canBlockStay(World world, int x, int y, int z) {
+        if(world.getBlock(x,y-1,z)== Blocks.air) {
+            world.setBlockToAir(x,y,z);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+        canBlockStay(world,x,y,z);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.ewyboy.blink.Rendering.Models.Items;
 
+import com.ewyboy.blink.Utillity.Logger;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -63,9 +64,9 @@ public class RodOfAgesModel extends ModelBase {
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         this.HatBottom.render(f5);
-        this.Core02.render(f5);
+        //this.Core02.render(f5);
         this.HatUp.render(f5);
-        this.Core01.render(f5);
+        //this.Core01.render(f5);
         this.RodEndHat.render(f5);
         this.HatPipe01.render(f5);
         this.HatPipe03.render(f5);
@@ -74,11 +75,16 @@ public class RodOfAgesModel extends ModelBase {
         this.HatPipe04.render(f5);
         this.HatPipe02.render(f5);
         this.TopHat.render(f5);
+
+        rotate01+=0.5f;
+        rotate02-=0.5f;
+
+        setRotateAngle(this.Core01,rotate01,rotate01,rotate01);
+        setRotateAngle(this.Core02,rotate02,rotate02,rotate02);
     }
 
-    /**
-     * This is a helper function from Tabula to set the rotation of model parts
-     */
+    private float rotate01 = 0.0f, rotate02 = 0.0f;
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
