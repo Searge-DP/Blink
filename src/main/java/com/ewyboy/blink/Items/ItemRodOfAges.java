@@ -2,20 +2,16 @@ package com.ewyboy.blink.Items;
 
 import com.ewyboy.blink.Loaders.BlockLoader;
 import com.ewyboy.blink.Networking.ClientProxy;
-import com.ewyboy.blink.Textures.TexturePath;
 import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
-import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.HashMap;
@@ -23,6 +19,10 @@ import java.util.List;
 import java.util.Random;
 
 public class ItemRodOfAges extends BaseItem {
+
+    public ItemRodOfAges() {
+        setFull3D();
+    }
 
     public String[] toolInfo = {};
 
@@ -43,35 +43,22 @@ public class ItemRodOfAges extends BaseItem {
                 z = nbt.getInteger("posZ");
                 dim = nbt.getInteger("dim");
             }
-            if(x != 0 && y != 0 && z != 0 && dim != 0){
-                info.add("X : " + x);
-                info.add("Y : " + y);
-                info.add("Z : " + z);
-                info.add("Dimension : " + dim);
+            String dimName;
+            if(dim==0) {
+                dimName="Overworld";
+            } else if (dim==1) {
+                dimName="Nether";
+            } else if (dim==2) {
+                dimName="End";
+            } else {
+                dimName= String.valueOf(dim);
+            }
+            if(x != 0 && y != 0 && z != 0) {
+                info.add("Target: X: "+x+" Y:"+y+" Z:"+z+" Dimension: " + dimName);
             }
         } else {
             info.add("Press shift to show info.");
         }
-
-    }
-
-    @SideOnly(Side.CLIENT)
-    private IIcon itemIcon;
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register) {
-        itemIcon = register.registerIcon(TexturePath.TextureLocation+":"+StringMap.ItemRodOfAges);
-    }
-
-    @Override
-    public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining) {
-        return itemIcon;
-    }
-
-    @Override
-    public IIcon getIconFromDamage(int dmg) {
-        return itemIcon;
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.ewyboy.blink.Loaders.BlockLoader;
 import com.ewyboy.blink.Loaders.RecipeLoader;
 import com.ewyboy.blink.Interface.GuiHandler;
 import com.ewyboy.blink.Loaders.ItemLoader;
+import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Networking.CommonProxy;
 import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
@@ -33,6 +34,7 @@ public final class Blink {
                 Config.init(event.getSuggestedConfigurationFile());
                 ItemLoader.loadItems();
                 BlockLoader.loadBlocks();
+                ClientProxy.loadModels();
             Logger.info("PreInitialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms )");
             Logger.info("PreInitialization process successfully done");
     }

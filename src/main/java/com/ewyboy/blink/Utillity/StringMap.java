@@ -18,7 +18,7 @@ public class StringMap {
 
     //Items
     public static final String ItemBlitzer = "Blitzer";
-    public static final String ItemRodOfAges = "RodOfAges";
+    public static final String ItemRodOfAges = "RodOfAgesModel";
     public static final String ItemLauncher = "Launcher";
     public static final String ItemEnderCapsule = "EnderCapsule";
 
