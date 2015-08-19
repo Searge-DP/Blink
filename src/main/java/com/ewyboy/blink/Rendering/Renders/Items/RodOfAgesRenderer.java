@@ -2,7 +2,6 @@ package com.ewyboy.blink.Rendering.Renders.Items;
 
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Rendering.Models.Items.RodOfAgesModel;
-import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.StringMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -26,9 +25,9 @@ public class RodOfAgesRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        if(type==type.EQUIPPED) {
+        if(type.equals(type.EQUIPPED)) {
             return true;
-        } else if (type == type.EQUIPPED_FIRST_PERSON) {
+        } else if (type.equals(type.EQUIPPED_FIRST_PERSON)) {
             return true;
         } else {
             return false;

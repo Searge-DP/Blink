@@ -25,4 +25,7 @@ public class StringMap {
     //CreativeTabs
     public static final String CreativeTabItem = "Blink Blocks";
     public static final String CreativeTabBlock = "Blink Items";
+
+    //RenderIDs
+    public static int BlockSwapperRenderID;
 }

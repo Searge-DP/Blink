@@ -1,11 +1,11 @@
 package com.ewyboy.blink.Main;
 
 import com.ewyboy.blink.Loaders.BlockLoader;
-import com.ewyboy.blink.Loaders.RecipeLoader;
-import com.ewyboy.blink.Interface.GuiHandler;
 import com.ewyboy.blink.Loaders.ItemLoader;
+import com.ewyboy.blink.Loaders.RecipeLoader;
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Networking.CommonProxy;
+import com.ewyboy.blink.TileEntities.TileEntityLoader;
 import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.StringMap;
@@ -34,6 +34,7 @@ public final class Blink {
                 Config.init(event.getSuggestedConfigurationFile());
                 ItemLoader.loadItems();
                 BlockLoader.loadBlocks();
+                TileEntityLoader.loadTileEntitys();
                 ClientProxy.loadModels();
             Logger.info("PreInitialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms )");
             Logger.info("PreInitialization process successfully done");
@@ -51,7 +52,6 @@ public final class Blink {
     void postInit (FMLPreInitializationEvent event){
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("PostInitialization started");
-                new GuiHandler();
                 RecipeLoader.loadRecipes();
             Logger.info("PostInitialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms )");
             Logger.info("PostInitialization process successfully done");

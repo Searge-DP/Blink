@@ -1,36 +1,24 @@
 package com.ewyboy.blink.Blocks;
 
 import com.ewyboy.blink.ParticleEngine;
-import com.ewyboy.blink.Textures.TexturePath;
-import com.ewyboy.blink.Utillity.Logger;
-import com.ewyboy.blink.Utillity.StringMap;
+import com.ewyboy.blink.TileEntities.TileEntitySwapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import org.lwjgl.Sys;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class BlockSwapper extends BaseBlock {
-
-    /**@Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
-        if (!world.isRemote) {
-            FMLNetworkHandler.openGui(player, Blink.instance, 0, world, x, y, z);
-        }
-        return true;
-    }*/
+public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
 
     private int defaultFlag = 3;
     int fx = 3;
@@ -168,36 +156,26 @@ public class BlockSwapper extends BaseBlock {
     }
 
     @Override
+    public int getRenderType() {
+        return -1;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public int getRenderBlockPass() {
+        return 0;
+    }
+
+    public boolean renderAsNormalBlock() {
+        return false;
+    }
+
+    @Override
     public int damageDropped(int meta) {
         return meta;
     }
 
-    @SideOnly(Side.CLIENT)
-    private IIcon TopIcon;
-
-    @SideOnly(Side.CLIENT)
-    private IIcon SidesIcon;
-
-    @SideOnly(Side.CLIENT)
-    private IIcon BotIcon;
-
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister register) {
-        TopIcon = register.registerIcon(TexturePath.TextureLocation + ":" + "TestTop" /**StringMap.BlockSwapper + "Top"**/);
-        SidesIcon = register.registerIcon(TexturePath.TextureLocation + ":" + "TestSide" /**StringMap.BlockSwapper + "Sides"**/);
-        BotIcon = register.registerIcon(TexturePath.TextureLocation + ":" + "TestBot" /**StringMap.BlockSwapper + "Bot"**/);
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int meta) {
-        if (side == 1) {
-            return TopIcon;
-        }
-        else if (side == 0) {
-            return BotIcon;
-        }
-        return SidesIcon;
+    public TileEntity createNewTileEntity(World world, int i) {
+        return new TileEntitySwapper();
     }
 }
