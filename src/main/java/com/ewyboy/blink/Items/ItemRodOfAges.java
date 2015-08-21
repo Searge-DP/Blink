@@ -6,6 +6,7 @@ import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -107,7 +108,7 @@ public class ItemRodOfAges extends BaseItem {
                 z = nbt.getInteger("posZ");
                 dim = nbt.getInteger("dim");
 
-                if (range == -1) {
+                if (range == (-1) || Minecraft.getMinecraft().playerController.isInCreativeMode()) {
                     isPlayerInRange = true;
                 } else if((player.posX - x) <= (range) &&
                    (player.posX - x) >= (-range) &&
