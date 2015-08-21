@@ -6,7 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class BaseEnderPoweredItem extends BaseItem{
+public class BaseEnderPoweredItem extends BaseItem {
 
 	public static final String NBTNAME = "blink-fuel";
 
@@ -22,11 +22,9 @@ public class BaseEnderPoweredItem extends BaseItem{
 		return false;
 	}
 
-
-	public void use(EntityPlayer player ){
+	public void use(EntityPlayer player ) {
 
 	}
-
 }
 
 class NBTHandler{
