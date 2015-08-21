@@ -1,27 +1,2 @@
-[22:50:57] [main/INFO]: Setting user: Player178
-[22:50:59] [Client thread/INFO]: LWJGL Version: 2.9.1
-[22:51:08] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Blink
-[22:51:09] [Sound Library Loader/INFO]: Sound engine started
-[22:51:10] [Client thread/INFO]: Created: 16x16 textures/blocks-atlas
-[22:51:10] [Client thread/INFO]: Created: 16x16 textures/items-atlas
-[22:51:10] [Client thread/INFO]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Blink
-[22:51:11] [Client thread/INFO]: Created: 512x256 textures/blocks-atlas
-[22:51:11] [Client thread/INFO]: Created: 512x256 textures/items-atlas
-[22:51:11] [Sound Library Loader/INFO]: Sound engine started
-[22:51:16] [Server thread/INFO]: Starting integrated minecraft server version 1.7.10
-[22:51:16] [Server thread/INFO]: Generating keypair
-[22:51:16] [Server thread/INFO]: Preparing start region for level 0
-[22:51:17] [Server thread/INFO]: Changing view distance to 12, from 10
-[22:51:17] [Server thread/INFO]: Player178[local:E:1158a5e9] logged in with entity id 22 at (-446.6624730022761, 1.0, -596.5445476185479)
-[22:51:17] [Server thread/INFO]: Player178 joined the game
-[22:51:29] [Server thread/INFO]: Player178 has just earned the achievement [Taking Inventory]
-[22:51:29] [Client thread/INFO]: [CHAT] Player178 has just earned the achievement [Taking Inventory]
-[22:54:09] [Server thread/INFO]: [Player178: Toggled downfall]
-[22:54:09] [Client thread/INFO]: [CHAT] Toggled downfall
-[22:59:25] [Client thread/INFO]: Stopping!
-[22:59:25] [Server thread/INFO]: Stopping server
-[22:59:25] [Server thread/INFO]: Saving players
-[22:59:25] [Server thread/INFO]: Saving worlds
-[22:59:25] [Server thread/INFO]: Saving chunks for level 'New World'/Overworld
-[22:59:25] [Server thread/INFO]: Saving chunks for level 'New World'/Nether
-[22:59:25] [Server thread/INFO]: Saving chunks for level 'New World'/The End
+[00:00:15] [Server thread/INFO]: [Player858: Toggled downfall]
+[00:00:15] [Client thread/INFO]: [CHAT] Toggled downfall

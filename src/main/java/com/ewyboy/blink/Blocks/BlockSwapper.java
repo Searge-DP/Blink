@@ -29,7 +29,7 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
         ArrayList<String> test = new ArrayList<String>();
         Random random = new Random();
 
-        if (Config.debugMode) {Logger.info("Side: "+side);}
+        if (Config.debugMode) {Logger.info("Side: " + side);}
         int north = 3, south = 2, east = 4, west = 5;
 
         if (side==west && (world.getBlock(x-2,y,z)==this)) {
