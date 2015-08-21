@@ -1,6 +1,7 @@
 package com.ewyboy.blink.Blocks;
 
 import com.ewyboy.blink.Textures.TexturePath;
+import com.ewyboy.blink.Utillity.ParticleEngine;
 import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -42,21 +43,7 @@ public class BlockMarker extends BaseBlock {
 
     @Override
     public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        for(double i = 0; i <= Math.PI; i +=0.010) {
-            double adjustedX = i * Math.cos(i);
-            double adjustedZ = i * Math.sin(i);
-
-            world.spawnParticle("portal",x+0.5,y,z+0.5, adjustedX, i, adjustedZ);
-            world.spawnParticle("portal",x+0.5,y,z+0.5, adjustedX*(-1), i, adjustedZ*(-1));
-            world.spawnParticle("portal",x+0.5,y,z+0.5, adjustedX*(-1), i, adjustedZ);
-            world.spawnParticle("portal",x+0.5,y,z+0.5, adjustedX, i, adjustedZ*(-1));
-
-            world.spawnParticle("portal",x+0.5,y,z+0.5, adjustedZ, i, adjustedX);
-            world.spawnParticle("portal",x+0.5,y,z+0.5, adjustedZ*(-1), i, adjustedX*(-1));
-            world.spawnParticle("portal",x+0.5,y,z+0.5, adjustedZ*(-1), i, adjustedX);
-            world.spawnParticle("portal",x+0.5,y,z+0.5, adjustedZ, i, adjustedX*(-1));
-
-        }
+        ParticleEngine.spawnBlinkParticle(x,y,z,world);
     }
 
     public boolean renderAsNormalBlock() {

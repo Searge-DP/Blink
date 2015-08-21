@@ -1,6 +1,8 @@
 package com.ewyboy.blink.Blocks;
 
-import com.ewyboy.blink.ParticleEngine;
+import com.ewyboy.blink.Utillity.Config;
+import com.ewyboy.blink.Utillity.Logger;
+import com.ewyboy.blink.Utillity.ParticleEngine;
 import com.ewyboy.blink.TileEntities.TileEntitySwapper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,6 +14,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -95,64 +98,52 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity) {
         ArrayList<String> test = new ArrayList<String>();
         Random random = new Random();
+            if (entity instanceof EntityPlayer) {
+                EntityPlayer player = (EntityPlayer) entity;
 
-        if     (world.getBlock(x-2, y, z) == this){ test.add(posToString(x-2, y, z));}
-        else if(world.getBlock(x+2, y, z) == this){ test.add(posToString(x+2, y, z));}
-        else if(world.getBlock(x, y, z-2) == this){ test.add(posToString(x, y, z-2));}
-        else if(world.getBlock(x, y, z+2) == this){ test.add(posToString(x, y, z+2));}
+                if (player.isSneaking()) {
+                    int direction = MathHelper.floor_double((double)((player.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 
-        else if(world.getBlock(x+2, y, z+2) == this){ test.add(posToString(x+2, y, z+2));}
-        else if(world.getBlock(x-2, y, z+2) == this){ test.add(posToString(x-2, y, z+2));}
-        else if(world.getBlock(x+2, y, z-2) == this){ test.add(posToString(x+2, y, z-2));}
-        else if(world.getBlock(x-2, y, z-2) == this){ test.add(posToString(x-2, y, z-2));}
-        else if(world.getBlock(x,y,z) == this) { test.add(posToString(x,y,z));}
-
-        int selection = random.nextInt(test.size());
-        String posString = test.get(selection);
-        String[] POS = posString.split(" ");
-        String X = POS[0], Y = POS[1], Z = POS[2];
-        int iX = Integer.parseInt(X), iY = Integer.parseInt(Y), iZ = Integer.parseInt(Z);
-
-        if (entity instanceof EntityPlayer) {
-            EntityPlayer player = (EntityPlayer) entity;
-            if (player.isSneaking()) {
-                if(!world.isRemote) {
-                    boolean test1=false, test2=false, test3=false;
-                    for (int i=1; i<=3;i++) {
-                        if (world.getBlock(iX,iY+i,iZ)==Blocks.air) {
-                            if(i==1) {
-                                test1=true;
-                            }if(i==2) {
-                                test2=true;
-                            }if(i==3) {
-                                test3=true;
-                            }
-                            if(test1&&test2&&test3) {
-                                player.setPositionAndUpdate(iX+0.5,iY+1.5,iZ+0.5);
-                                ParticleEngine.playSound("mob.endermen.portal", world, entity,iX,iY,iZ,1.0f,1.0f);
-                                for (int i1 = 0; i1<1000; i1++) {
-                                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,fx,fx,0);
-                                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,0,fx,fx);
-                                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,-fx,fx,0);
-                                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,0,fx,-fx);
-                                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,0,fx,-fx);
-                                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,fx,fx,-fx);
-                                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,-fx,fx,fx);
-                                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,-fx,fx,-fx);
-                                    ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,fx,fx,fx);
+                    if (direction==1 && (world.getBlock(x-2,y,z)==this)) {
+                        test.add(posToString(x-2,y,z));
+                    } else if (direction==2 && (world.getBlock(x,y,z-2)==this)) {
+                        test.add(posToString(x,y,z-2));
+                    } else if (direction==3 && (world.getBlock(x+2,y,z)==this)) {
+                        test.add(posToString(x+2,y,z));
+                    } else if (direction==0 && (world.getBlock(x,y,z+2)==this)) {
+                        test.add(posToString(x,y,z+2));
+                    } else {
+                        if(world.getBlock(x,y,z)==this) {test.add(posToString(x,y,z));}
+                    }
+                    int selection = random.nextInt(test.size());
+                    if (Config.debugMode) {Logger.info(test.get(selection));}
+                    String posString = test.get(selection);
+                    String[] POS = posString.split(" ");
+                    String X=POS[0],Y=POS[1],Z=POS[2];
+                    int iX = Integer.parseInt(X),iY = Integer.parseInt(Y), iZ = Integer.parseInt(Z);
+                    ParticleEngine.spawnBlinkParticle(iX, iY+1, iZ, world);
+                    if(!world.isRemote) {
+                        boolean test1=false, test2=false, test3=false;
+                        for (int i=1; i<=3;i++) {
+                            if (world.getBlock(iX,iY+i,iZ)==Blocks.air) {
+                                if(i==1) {
+                                    test1=true;
+                                }if(i==2) {
+                                    test2=true;
+                                }if(i==3) {
+                                    test3=true;
+                                }
+                                if(test1&&test2&&test3) {
+                                    player.setPositionAndUpdate(iX+0.5,iY+1.5,iZ+0.5);
+                                    float max = 0.2f, min = 0.01f;
+                                    float pitch = (float)Math.random()*(max-min)+min;
+                                    world.playSoundAtEntity(player,"mob.endermen.portal",1.0f ,pitch);
                                 }
                             }
                         }
                     }
                 }
             }
-        }
-        if (entity instanceof EntityItem) {
-            if (world.getBlock(iX,iY+1,iZ)==Blocks.air) {
-                entity.setPosition(iX + 0.5, iY + 1.5, iZ + 0.5);
-                ParticleEngine.playSound("mob.endermen.portal",world, (EntityItem) entity, x,y,z, 1.0F, 1.0F);
-            }
-        }
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.ewyboy.blink.Rendering.Models.Blocks;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
@@ -103,17 +104,12 @@ public class SwapperModel extends ModelBase {
     }
 
     @Override
-    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
+    public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
         this.Top1.render(f5);
         this.Plate8.render(f5);
         this.Plate7.render(f5);
         this.Bot4.render(f5);
         this.Plate4.render(f5);
-        GL11.glEnable(GL11.GL_BLEND);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-        GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.75F);
-        this.Main.render(f5);
-        GL11.glDisable(GL11.GL_BLEND);
         this.Plate1.render(f5);
         this.TopSide4.render(f5);
         this.Top2.render(f5);
@@ -130,6 +126,13 @@ public class SwapperModel extends ModelBase {
         this.Bot1.render(f5);
         this.Plate6.render(f5);
         this.Bot3.render(f5);
+
+        GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            GL11.glColor4f(0.75F, 1.0F, 1.0F, 1.0F);
+            OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 242, 242);
+        this.Main.render(f5);
+        GL11.glDisable(GL11.GL_BLEND);
     }
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;

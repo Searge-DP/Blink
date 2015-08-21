@@ -165,7 +165,6 @@ public class ItemBlitzer extends BaseItem {
         spawnEnderEffects(world,player,X,Y,Z);
 
         if (!world.isRemote) {
-
             if (player.isSprinting()) {
                 if (test == 1) {
                     if(canPlayerFitInSpace(world ,player ,x-2.2,y-1,z) == true) {
