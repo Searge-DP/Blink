@@ -23,56 +23,44 @@ import java.util.Random;
 public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
 
     private int defaultFlag = 3;
-    int fx = 3;
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ) {
         ArrayList<String> test = new ArrayList<String>();
         Random random = new Random();
 
-        if(!world.isRemote) {
-            if(world.isBlockIndirectlyGettingPowered(x, y, z)) {
-                for(int i = 2; i<5; i++) {
-                    if     (world.getBlock(x-i, y, z) == this){ test.add(posToString(x-i, y, z));}
-                    else if(world.getBlock(x+i, y, z) == this){ test.add(posToString(x+i, y, z));}
-                    else if(world.getBlock(x, y, z-i) == this){ test.add(posToString(x, y, z-i));}
-                    else if(world.getBlock(x, y, z+i) == this){ test.add(posToString(x, y, z+i));}
+        if (Config.debugMode) {Logger.info("Side: "+side);}
+        int north = 3, south = 2, east = 4, west = 5;
 
-                    else if(world.getBlock(x+i, y, z+i) == this){ test.add(posToString(x+i, y, z+i));}
-                    else if(world.getBlock(x-i, y, z+i) == this){ test.add(posToString(x-i, y, z+i));}
-                    else if(world.getBlock(x+i, y, z-i) == this){ test.add(posToString(x+i, y, z-i));}
-                    else if(world.getBlock(x-i, y, z-i) == this){ test.add(posToString(x-i, y, z-i));}
-
-                    else if(world.getBlock(x,y,z) == this) { test.add(posToString(x,y,z));}
-                }
-
-                int selection = random.nextInt(test.size());
-                String posString = test.get(selection);
-                String[] POS = posString.split(" ");
-                String X = POS[0], Y = POS[1], Z = POS[2];
-                int iX = Integer.parseInt(X), iY = Integer.parseInt(Y), iZ = Integer.parseInt(Z);
-
-                Block block1 = world.getBlock(x,y+1,z);
-                int block1meta = world.getBlockMetadata(x,y+1,z);
-                Block block2 = world.getBlock(iX,iY+1,iZ);
-                int block2meta = world.getBlockMetadata(iX,iY+1,iZ);
-
-                world.setBlock(x,y+1,z,block2, block2meta, defaultFlag);
-                world.setBlock(iX,iY+1,iZ,block1, block1meta, defaultFlag);
-            }
+        if (side==west && (world.getBlock(x-2,y,z)==this)) {
+            test.add(posToString(x-2,y,z));
+        } else if (side==north && (world.getBlock(x,y,z-2)==this)) {
+            test.add(posToString(x,y,z-2));
+        } else if (side==east && (world.getBlock(x+2,y,z)==this)) {
+            test.add(posToString(x+2,y,z));
+        } else if (side==south && (world.getBlock(x,y,z+2)==this)) {
+            test.add(posToString(x,y,z+2));
+        } else {
+            if(world.getBlock(x,y,z)==this) {test.add(posToString(x,y,z));}
         }
+
+        int selection = random.nextInt(test.size());
+        String posString = test.get(selection);
+        String[] POS = posString.split(" ");
+        String X = POS[0], Y = POS[1], Z = POS[2];
+        int iX = Integer.parseInt(X), iY = Integer.parseInt(Y), iZ = Integer.parseInt(Z);
+
+        Block block1 = world.getBlock(x,y+1,z);
+        int block1meta = world.getBlockMetadata(x,y+1,z);
+        Block block2 = world.getBlock(iX,iY+1,iZ);
+        int block2meta = world.getBlockMetadata(iX,iY+1,iZ);
+
+        ParticleEngine.spawnBlinkParticle(iX,iY+1,iZ,world);
+
+        world.setBlock(x,y+1,z,block2, block2meta, defaultFlag);
+        world.setBlock(iX,iY+1,iZ,block1, block1meta, defaultFlag);
+
         ParticleEngine.playSound("mob.endermen.portal", world, player, x, y, z, 0.5F, 3.0F);
-        for (int i = 0; i<1000; i++) {
-            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,fx,fx,0);
-            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,0,fx,fx);
-            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,-fx,fx,0);
-            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,0,fx,-fx);
-            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,0,fx,-fx);
-            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,fx,fx,-fx);
-            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,-fx,fx,fx);
-            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,-fx,fx,-fx);
-            ParticleEngine.spawnParticleAtBlock("portal",world, x,y+1,z,fx,fx,fx);
-        }
         return true;
     }
 
@@ -99,7 +87,7 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
         Random random = new Random();
         if (entity instanceof EntityPlayer) {
             EntityPlayer player = (EntityPlayer) entity;
-                int direction = MathHelper.floor_double((double)((player.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+            int direction = MathHelper.floor_double((double)((player.rotationYaw * 4F) / 360F) + 0.5D) & 3;
 
                 if (direction==1 && (world.getBlock(x-2,y,z)==this)) {
                     test.add(posToString(x-2,y,z));
@@ -147,7 +135,7 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
 
     @Override
     public int getRenderType() {
-        return -1;
+        return (-1);
     }
 
     @SideOnly(Side.CLIENT)
