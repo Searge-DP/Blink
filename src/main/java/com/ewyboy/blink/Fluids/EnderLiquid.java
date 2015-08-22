@@ -1,7 +1,13 @@
 package com.ewyboy.blink.Fluids;
 
 import com.ewyboy.blink.Loaders.CreativeTabLoader;
+import com.ewyboy.blink.Textures.TexturePath;
+import com.ewyboy.blink.Utillity.StringMap;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -12,6 +18,23 @@ public class EnderLiquid extends BlockFluidClassic {
     public EnderLiquid(Fluid fluid, Material material) {
         super(fluid, material);
         setCreativeTab(CreativeTabLoader.BlinkBlockTab);
+    }
+
+    @SideOnly(Side.CLIENT)
+    protected IIcon stillIcon;
+    @SideOnly(Side.CLIENT)
+    protected IIcon flowingIcon;
+
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        return (side == 0 || side == 1)? stillIcon : flowingIcon;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public void registerBlockIcons(IIconRegister register) {
+        stillIcon = register.registerIcon(TexturePath.TextureLocation + ":" + StringMap.BlockEnderFluid + "Still");
+        flowingIcon = register.registerIcon(TexturePath.TextureLocation + ":" + StringMap.BlockEnderFluid + "Flow");
     }
 
     @Override

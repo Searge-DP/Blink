@@ -73,7 +73,7 @@ public class BlockMarker extends BaseBlock {
     @Override
     public void registerBlockIcons(IIconRegister register)
     {
-        TextureIcon = register.registerIcon(TexturePath.TextureLocation + ":" + StringMap.BlockMarker+"New1");
+        TextureIcon = register.registerIcon(TexturePath.TextureLocation + ":" + StringMap.BlockMarker);
     }
 
     @SideOnly(Side.CLIENT)

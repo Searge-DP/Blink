@@ -32,7 +32,7 @@ public class SwapperRenderer extends TileEntitySpecialRenderer {
     public void renderTileEntityAt(TileEntity entity, double x, double y, double z, float scale) {
         GL11.glPushMatrix();
             GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(StringMap.ID + ":" + "textures/models/SwapperTextureGL11.png"));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(StringMap.ID + ":" + "textures/models/SwapperTexture.png"));
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 242, 242);
             GL11.glPushMatrix();
                 GL11.glRotatef(180F, 0.0F, 0.0F, 1.0F);
@@ -51,4 +51,6 @@ public class SwapperRenderer extends TileEntitySpecialRenderer {
         tess.setColorOpaque_F(brightness, brightness, brightness);
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) modulousModifier, divModifier);
     }
+
+    private static final double flickerOffset = 0.0005d;
 }
