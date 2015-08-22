@@ -9,12 +9,16 @@ public class StringMap {
     //Mod info
     public static final String ID = "blink";
     public static final String Name = "Blink";
-    public static final String Version = "Dev 2.0";
     public static final String MinecraftVersion = "1.7.10";
+    public static final String VersionMajor = "0";
+    public static final String VersionMinor = "0";
+    public static final String VersionPatch = "0";
+    public static final String VersionBuildName = Name + "-" + MinecraftVersion + "-" + VersionMajor + "." + VersionMinor + "." + VersionPatch;
 
     //Blocks
     public static final String BlockSwapper = "Swapper";
     public static final String BlockMarker = "Marker";
+    public static final String BlockEnderFluid = "EnderLiquid";
 
     //Items
     public static final String ItemBlitzer = "Blitzer";

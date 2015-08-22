@@ -24,6 +24,6 @@ public class BlockLoader {
                 Marker = new BlockMarker().setBlockName(StringMap.BlockMarker);
                     GameRegistry.registerBlock(Marker, StringMap.BlockMarker);
                         log(Marker);
-            Logger.info("Loading blocks finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms )");
+        Logger.info("Loading blocks finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms )");
     }
 }

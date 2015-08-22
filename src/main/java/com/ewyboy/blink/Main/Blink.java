@@ -1,11 +1,12 @@
 package com.ewyboy.blink.Main;
 
 import com.ewyboy.blink.Loaders.BlockLoader;
+import com.ewyboy.blink.Loaders.FluidLoader;
 import com.ewyboy.blink.Loaders.ItemLoader;
 import com.ewyboy.blink.Loaders.RecipeLoader;
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Networking.CommonProxy;
-import com.ewyboy.blink.TileEntities.TileEntityLoader;
+import com.ewyboy.blink.Loaders.TileEntityLoader;
 import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.StringMap;
@@ -17,7 +18,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 import java.util.concurrent.TimeUnit;
 
-@Mod (modid = StringMap.ID, name = StringMap.Name, version = StringMap.Version, acceptedMinecraftVersions = "["+StringMap.MinecraftVersion+"]")
+@Mod (modid = StringMap.ID, name = StringMap.Name, version = StringMap.VersionBuildName, acceptedMinecraftVersions = "["+StringMap.MinecraftVersion+"]")
 
 public final class Blink {
 
@@ -34,7 +35,8 @@ public final class Blink {
                 Config.init(event.getSuggestedConfigurationFile());
                 ItemLoader.loadItems();
                 BlockLoader.loadBlocks();
-                TileEntityLoader.loadTileEntitys();
+                FluidLoader.loadFluids();
+                TileEntityLoader.loadTileEntities();
                 ClientProxy.loadModels();
             Logger.info("PreInitialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms )");
             Logger.info("PreInitialization process successfully done");

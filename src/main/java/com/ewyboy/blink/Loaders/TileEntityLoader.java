@@ -1,5 +1,6 @@
-package com.ewyboy.blink.TileEntities;
+package com.ewyboy.blink.Loaders;
 
+import com.ewyboy.blink.TileEntities.TileEntitySwapper;
 import com.ewyboy.blink.Utillity.Logger;
 import com.google.common.base.Stopwatch;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -14,11 +15,12 @@ public class TileEntityLoader {
 
     public static TileEntity Swapper;
 
-    public static void loadTileEntitys() {
+    public static void loadTileEntities() {
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("Loading tile entities started");
                 Swapper = new TileEntitySwapper();
-            GameRegistry.registerTileEntity(TileEntitySwapper.class, "TileEntityEMCBank");
+                GameRegistry.registerTileEntity(TileEntitySwapper.class, "TileEntityEMCBank");
+            log(Swapper);
         Logger.info("Loading tile entities finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms");
     }
 
