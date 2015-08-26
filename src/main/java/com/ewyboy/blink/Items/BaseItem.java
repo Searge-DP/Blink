@@ -10,5 +10,4 @@ public class BaseItem extends Item {
         this.setNoRepair();
         this.setMaxStackSize(1);
     }
-
 }

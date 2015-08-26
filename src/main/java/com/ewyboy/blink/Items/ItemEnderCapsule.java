@@ -25,10 +25,7 @@ public class ItemEnderCapsule extends BaseItem {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean useExtraInformation) {
         if (ClientProxy.shiftPressed()) {
-            info.add("A common fuel source for all* things");
-            info.add("Fuel : " + NBTHandler.getNBTValue(itemstack));
-            info.add(" ");
-            info.add("*only for this mod Kappa");
+            info.add(NBTHandler.getNBTValue(itemstack) +" MB of " + StringMap.EnderFluid);
         } else {
             info.add("Press shift to show info");
         }
@@ -57,7 +54,7 @@ public class ItemEnderCapsule extends BaseItem {
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
         NBTTagCompound nbt = new NBTTagCompound();
-        nbt.setInteger(BaseEnderPoweredItem.NBTNAME , 5);
+        nbt.setInteger(BaseEnderPoweredItem.NBTNAME , 1000);
         return NBTHandler.updateAndChange(itemStack, nbt);
     }
 

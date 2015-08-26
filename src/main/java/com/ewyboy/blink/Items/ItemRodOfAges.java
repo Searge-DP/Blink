@@ -4,6 +4,7 @@ import com.ewyboy.blink.Loaders.BlockLoader;
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
+import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.common.launcher.FMLTweaker;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -135,16 +136,14 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
                             player.setPositionAndUpdate(x + 0.5, y + 0.05, z + 0.5);
                             use(player);
                         }
-                        String warn = EnumChatFormatting.RED + "Warning: " + EnumChatFormatting.WHITE;
-
                         if (!isPlayerInRange && player.dimension == dim) {
-                            player.addChatComponentMessage(new ChatComponentText(warn + "You are to far away"));
+                            player.addChatComponentMessage(new ChatComponentText(StringMap.warn + "You are to far away"));
                         }
                         if (world.getBlock(x, y, z) != BlockLoader.Marker && player.dimension == dim) {
-                            player.addChatComponentMessage(new ChatComponentText(warn + "Marker not found"));
+                            player.addChatComponentMessage(new ChatComponentText(StringMap.warn + "Marker not found"));
                         }
                         if (player.dimension != dim) {
-                            player.addChatComponentMessage(new ChatComponentText(warn + "You are not in the same dimension as target"));
+                            player.addChatComponentMessage(new ChatComponentText(StringMap.warn + "You are not in the same dimension as target"));
                         }
                     }
                 }

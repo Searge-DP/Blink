@@ -1,5 +1,6 @@
 package com.ewyboy.blink.Blocks;
 
+import com.ewyboy.blink.Rendering.Models.Blocks.SwapperModel;
 import com.ewyboy.blink.TileEntities.TileEntitySwapper;
 import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
@@ -8,11 +9,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -70,6 +73,12 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
             return true;
         }
         return false;
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        return Blocks.stone.getBlockTextureFromSide(1);
     }
 
     public AxisAlignedBB getCollisionBoundingBoxFromPool(World world, int par2, int par3, int par4) {
@@ -138,9 +147,19 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
         return (-1);
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+    public boolean isOpaqueCube() {
+        return false;
+    }
+
+    @Override
     public int getRenderBlockPass() {
-        return 0;
+        return 1;
+    }
+
+    @Override
+    public boolean canRenderInPass(int pass) {
+        return true;
     }
 
     public boolean renderAsNormalBlock() {

@@ -12,7 +12,6 @@ public  class NBTHandler {
     }
 
     public static Integer getNBTValue(ItemStack i) {
-
         NBTTagCompound nbt;
         if (hasNBT(i))
             nbt = i.getTagCompound();
@@ -88,7 +87,7 @@ public  class NBTHandler {
 
                 Integer fuel = nbt.getInteger(BaseEnderPoweredItem.NBTNAME);
                 if (fuel != null) {
-                    fuel--;
+                    fuel-=50;
                     nbt.setInteger(BaseEnderPoweredItem.NBTNAME, fuel);
                     System.out.println(">>> Remove");
                     return updateAndChange(itemStack, nbt);
@@ -97,7 +96,6 @@ public  class NBTHandler {
         }
         return itemStack;
     }
-
 
     //Create the basic nbt
     public static ItemStack create(ItemStack itemStack) {
@@ -115,6 +113,4 @@ public  class NBTHandler {
         item.setTagCompound(nbt);
         return item;
     }
-
-
 }

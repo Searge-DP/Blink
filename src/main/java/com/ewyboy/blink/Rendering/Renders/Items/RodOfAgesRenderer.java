@@ -44,11 +44,11 @@ public class RodOfAgesRenderer implements IItemRenderer {
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         ItemStack enderEye = new ItemStack(Items.ender_eye, 1, 0);
-        EntityItem entity = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, enderEye);
+        EntityItem entityEye = new EntityItem(Minecraft.getMinecraft().theWorld, 0D, 0D, 0D, enderEye);
 
         if (type.equals(type.EQUIPPED_FIRST_PERSON)) {
             GL11.glPushMatrix();
-            entity.hoverStart = -1.0F;
+            entityEye.hoverStart = -1.0F;
             RenderItem.renderInFrame = true;
             GL11.glScalef(1.0f,1.0f,1.0f);
             if(ClientProxy.shiftPressed()) {
@@ -61,7 +61,7 @@ public class RodOfAgesRenderer implements IItemRenderer {
             GL11.glRotatef(180, rotate, 0, 1);
             GL11.glColor3f(0.0F,1.0F,0.0F);
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 242, 242);
-            RenderManager.instance.renderEntityWithPosYaw(entity, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
+            RenderManager.instance.renderEntityWithPosYaw(entityEye, 0.0D, 0.0D, 0.0D, 0.0F, 0.0F);
             RenderItem.renderInFrame = false;
             GL11.glPopMatrix();
         } else if (type.equals(type.EQUIPPED)) {

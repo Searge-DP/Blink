@@ -135,7 +135,6 @@ public class SwapperModel extends ModelBase {
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 242, 242);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-            GL11.glColor3f(((RGB * 12) / 10000),((RGB * 54) / 10000),((RGB * 48) / 10000));
         this.Main.render(f5);
         GL11.glDisable(GL11.GL_BLEND);
     }

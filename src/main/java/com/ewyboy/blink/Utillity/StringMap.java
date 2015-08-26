@@ -1,5 +1,7 @@
 package com.ewyboy.blink.Utillity;
 
+import net.minecraft.util.EnumChatFormatting;
+
 public class StringMap {
 
     //Networking
@@ -20,6 +22,9 @@ public class StringMap {
     public static final String BlockMarker = "Marker";
     public static final String BlockEnderFluid = "EnderLiquid";
 
+    //Fluids
+    public static final String EnderFluid = "EnderFluid";
+
     //Items
     public static final String ItemBlitzer = "Blitzer";
     public static final String ItemRodOfAges = "RodOfAgesModel";
@@ -32,4 +37,7 @@ public class StringMap {
 
     //RenderIDs
     public static int BlockSwapperRenderID;
+
+    //Strings
+    public static final String warn = EnumChatFormatting.RED + "Warning: " + EnumChatFormatting.WHITE;
 }

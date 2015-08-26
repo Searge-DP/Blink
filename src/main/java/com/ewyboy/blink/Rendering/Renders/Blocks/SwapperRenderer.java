@@ -8,12 +8,14 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-public class SwapperRenderer extends TileEntitySpecialRenderer {
+public class SwapperRenderer extends TileEntitySpecialRenderer implements IItemRenderer {
 
     private final SwapperModel model;
 
@@ -52,5 +54,32 @@ public class SwapperRenderer extends TileEntitySpecialRenderer {
         OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) modulousModifier, divModifier);
     }
 
-    private static final double flickerOffset = 0.0005d;
+    @Override
+    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
+        return true;
+    }
+
+    @Override
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+        return true;
+    }
+
+    @Override
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+        GL11.glPushMatrix();
+        GL11.glScalef(1.0f,1.0f,1.0f);
+        if(type.equals(type.EQUIPPED)) {
+            GL11.glRotatef(180,0f,0f,0f);
+            GL11.glTranslatef(-1.0f,-0.65f,-1.0f);
+        }else if (type.equals(type.INVENTORY)) {
+            GL11.glRotatef(180,1f,0f,1f);
+            GL11.glTranslatef(0.5f,-1.425f,0.5f);
+        } else {
+            GL11.glRotatef(180,1f,0f,1f);
+            GL11.glTranslatef(0.5f,-1.5f,0.5f);
+        }
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(StringMap.ID + ":" + "textures/models/SwapperTexture.png"));
+        this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        GL11.glPopMatrix();
+    }
 }
