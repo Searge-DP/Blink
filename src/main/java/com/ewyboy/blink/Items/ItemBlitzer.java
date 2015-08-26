@@ -2,7 +2,6 @@ package com.ewyboy.blink.Items;
 
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Textures.TexturePath;
-import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,12 +9,10 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import javax.swing.text.PlainDocument;
 import java.util.List;
 
 public class ItemBlitzer extends BaseItem {

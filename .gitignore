@@ -1,0 +1,16 @@
+.gradle/
+build/
+eclipse/
+out/
+photoshop/
+
+Blink.ipr
+Blink.iws
+Blink.iml
+
+CREDITS-fml.txt
+LICENSE-fml.txt
+README.txt
+forge-1.7.10-10.13.4.1492-1.7.10-changelog.txt
+MinecraftForge-License.txt
+MinecraftForge-Credits.txt
