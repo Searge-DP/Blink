@@ -32,8 +32,8 @@ public class StringMap {
     public static final String ItemEnderCapsule = "EnderCapsule";
 
     //CreativeTabs
-    public static final String CreativeTabItem = "Blink Blocks";
-    public static final String CreativeTabBlock = "Blink Items";
+    public static final String CreativeTabItem = "Blink Items";
+    public static final String CreativeTabBlock = "Blink Blocks";
 
     //RenderIDs
     public static int BlockSwapperRenderID;

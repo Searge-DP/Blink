@@ -2,12 +2,14 @@ package com.ewyboy.blink.Items;
 
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Textures.TexturePath;
+import com.ewyboy.blink.Utillity.Config;
+import com.ewyboy.blink.Utillity.Logger;
+import com.ewyboy.blink.Utillity.ParticleEngine;
 import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
@@ -30,77 +32,63 @@ public class ItemBlitzer extends BaseItem {
         }
     }
 
-    public boolean canPlayerFitInSpace(World world, EntityPlayer player, double x, double y , double z) {
-        return world.getBlock((int)x, (int)y, (int)z) == Blocks.air && world.getBlock((int)x, (int)y+1,(int) z) == Blocks.air;
-    }
-
-    @Override
-    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hit) {
-
-        double X = player.posX, Y = player.posY, Z = player.posZ;
-
-        double upY = 3.75, downY = 2.75;
-        double blink = 1.75;
-
-        int test = MathHelper.floor_double((double)((player.rotationYaw * 4F) / 360F) + 0.5D) & 3;
-
-        if (!world.isRemote) {
-            if (player.isSprinting()) {
-                if (test == 1) {
-                    if(canPlayerFitInSpace(world ,player ,x-2.2,y-1,z)) {
-                        X = X - blink * 2;
-                    }
-                }
-                if (test == 3) {
-                    if(canPlayerFitInSpace(world ,player ,x+2.2,y-1,z)) {
-                        X = X + blink * 2;
-                    }
-                }
-                if (test == 2) {
-                    if(canPlayerFitInSpace(world ,player ,x,y-1,z-2.2)) {
-                        Z = Z - blink * 2;
-                    }
-                }
-                if (test == 0) {
-                    if(canPlayerFitInSpace(world ,player ,x,y-1,z+2.2)) {
-                        Z = Z + blink * 2;
-                    }
-                }
-            } else if(!player.onGround) {
-                if(canPlayerFitInSpace(world ,player ,x,y+2,z)) {
-                    Y = Y + upY;
-                }
-            } else if (player.isSneaking()) {
-                if(canPlayerFitInSpace(world,player,x,y-1.5,z)) {
-                    Y = Y - downY;
-                }
-            } else {
-                if (test == 1) {
-                    if(canPlayerFitInSpace(world ,player ,x-1.2,y-1,z)) {
-                        X = X - blink;
-                    }
-                }
-                if (test == 3) {
-                    if(canPlayerFitInSpace(world ,player ,x+1.2,y-1,z)) {
-                        X = X + blink;
-                    }
-                }
-                if (test == 2) {
-                    if(canPlayerFitInSpace(world ,player ,x,y-1,z-1.2)) {
-                        Z = Z - blink;
-                    }
-                }
-                if (test == 0) {
-                    if(canPlayerFitInSpace(world ,player ,x,y-1,z+1.2)) {
-                        Z = Z + blink;
-                    }
-                }
-            }
-               player.setPositionAndUpdate(X, Y, Z);
+    private boolean canPlayerFitInTarget(EntityPlayer player,World world, double x, double y, double z) {
+        if (world.isAirBlock((int)x,(int)y,(int)z) && world.isAirBlock((int)x,(int)y+1,(int)z)) {
+            return true;
         } else {
             return false;
         }
-        return true;
+    }
+
+    @Override
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+        double posX = player.posX, posY = player.posY, posZ = player.posZ;
+        int dir = MathHelper.floor_double((double) ((player.rotationYaw * 4F) / 360F) + 0.5D) & 3;
+        if (Config.debugMode) {Logger.info("Side: " + side);}
+        double blink = 1.75;
+
+        if(!world.isRemote) {
+            if (side==2 || side==3 || side==4 || side==5) {
+                if (dir==0) {
+                    if (!player.isSprinting()) {
+                        posZ = posZ + blink;
+                    } else {
+                        posZ = posZ + blink * 2;
+                    }
+                }
+                if (dir==1) {
+                    if (!player.isSprinting()) {
+                        posX = posX - blink;
+                    } else {
+                        posX = posX - blink * 2;
+                    }
+                }
+                if (dir==2) {
+                    if (!player.isSprinting()) {
+                        posZ = posZ - blink;
+                    } else {
+                        posZ = posZ - blink * 2;
+                    }
+                }
+                if (dir==3) {
+                    if (!player.isSprinting()) {
+                        posX = posX + blink;
+                    } else {
+                        posX = posX + blink * 2;
+                    }
+                }
+            } else if (side==1) {
+                posY = posY - blink * 2;
+            } else if (side==0) {
+                posY = posY + blink * 2;
+            }
+            float max = 0.875f, min = 0.325f;
+            player.setPositionAndUpdate(posX, posY, posZ);
+            float pitch = (float) Math.random() * (max - min) + min;
+            world.playSoundAtEntity(player, "mob.endermen.portal", 1.0f, pitch);
+            ParticleEngine.spawnBlinkParticle((int)posX,(int)posY,(int)posZ, world);
+        }
+        return false;
     }
 
     @SideOnly(Side.CLIENT)

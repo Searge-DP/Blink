@@ -1,6 +1,5 @@
 package com.ewyboy.blink.Blocks;
 
-import com.ewyboy.blink.Rendering.Models.Blocks.SwapperModel;
 import com.ewyboy.blink.TileEntities.TileEntitySwapper;
 import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
@@ -9,7 +8,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.client.particle.EffectRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

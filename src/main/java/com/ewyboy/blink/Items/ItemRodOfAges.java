@@ -5,7 +5,6 @@ import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.StringMap;
-import cpw.mods.fml.common.launcher.FMLTweaker;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
@@ -48,20 +47,25 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
             }
             String dimName;
             if (dim == 0) {
-                dimName = "Overworld";
+                dimName = EnumChatFormatting.GREEN + "Overworld";
+            } else if (dim == -1) {
+                dimName = EnumChatFormatting.RED + "Nether";
             } else if (dim == 1) {
-                dimName = "Nether";
-            } else if (dim == 2) {
-                dimName = "End";
+                dimName = EnumChatFormatting.DARK_PURPLE + "End";
             } else {
                 dimName = String.valueOf(dim);
             }
+
             if (x != 0 && y != 0 && z != 0) {
-                info.add("Target: X: " + x + " Y:" + y + " Z:" + z + " Dimension: " + dimName);
+                info.add("Target:" +
+                    " X: " + EnumChatFormatting.AQUA + x + EnumChatFormatting.WHITE +
+                    " Y: " + EnumChatFormatting.AQUA + y + EnumChatFormatting.WHITE +
+                    " Z: " + EnumChatFormatting.AQUA + z + EnumChatFormatting.WHITE +
+                    " Dimension: " + dimName);
+                }
+            } else {
+                info.add("Press shift to show info.");
             }
-        } else {
-            info.add("Press shift to show info.");
-        }
     }
 
     @Override

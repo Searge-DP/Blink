@@ -1,12 +1,12 @@
 #Block
-
-tile.Swapper.name=Swapper[WIP]
+tile.Swapper.name=Swapper
+tile.Marker.name=Marker
+tile.enderLiquid=Ender Liquid
 
 #Items
-
-item.RodOfAges.name=Rod of the Ages [Unobtainable]
-item.Blitzer.name=Blitzer [WIP]
-item.OffTaker.name=Staff of takeoff! [WIP]
+item.RodOfAgesModel.name=Rod of the Ages
+item.Blitzer.name=Blitzer
+item.Launcher.name=Launcher
 item.EnderCapsule.name=Ender Capsule
 
 #Creative Tabs
