@@ -53,28 +53,28 @@ public class ItemBlitzer extends BaseItem {
                     if (!player.isSprinting()) {
                         posZ = posZ + blink;
                     } else {
-                        posZ = posZ + blink * 2;
+                        posZ = posZ + (blink * 2);
                     }
                 }
                 if (dir==1) {
                     if (!player.isSprinting()) {
                         posX = posX - blink;
                     } else {
-                        posX = posX - blink * 2;
+                        posX = posX - (blink * 2);
                     }
                 }
                 if (dir==2) {
                     if (!player.isSprinting()) {
                         posZ = posZ - blink;
                     } else {
-                        posZ = posZ - blink * 2;
+                        posZ = posZ - (blink * 2);
                     }
                 }
                 if (dir==3) {
                     if (!player.isSprinting()) {
                         posX = posX + blink;
                     } else {
-                        posX = posX + blink * 2;
+                        posX = posX + (blink * 2);
                     }
                 }
             } else if (side==1) {
@@ -82,8 +82,11 @@ public class ItemBlitzer extends BaseItem {
             } else if (side==0) {
                 posY = posY + blink * 2;
             }
+            if (Config.debugMode) {Logger.info("X: " + (int)posX + " Y: " + posY + " Z: " + (int)posZ);}
             float max = 0.875f, min = 0.325f;
-            player.setPositionAndUpdate(posX, posY, posZ);
+            if (world.isAirBlock((int)posX,(int)posY+1,(int)posZ) && world.isAirBlock((int)posX,(int)posY+2,(int)posZ)) {
+                player.setPositionAndUpdate(posX, posY, posZ);
+            }
             float pitch = (float) Math.random() * (max - min) + min;
             world.playSoundAtEntity(player, "mob.endermen.portal", 1.0f, pitch);
             ParticleEngine.spawnBlinkParticle((int)posX,(int)posY,(int)posZ, world);
