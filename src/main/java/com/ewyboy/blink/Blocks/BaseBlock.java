@@ -1,6 +1,7 @@
 package com.ewyboy.blink.Blocks;
 
 import com.ewyboy.blink.Loaders.CreativeTabLoader;
+import com.ewyboy.blink.Utillity.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -36,23 +37,24 @@ public class BaseBlock extends Block {
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLivingBase, ItemStack itemStack) {
         super.onBlockPlacedBy(world, x, y, z, entityLivingBase, itemStack);
-        if (world.getTileEntity(x,y,z) instanceof TileEntity || world.getBlock(x,y,z) instanceof Block) {
-            int direction = 0;
-            int facing = MathHelper.floor_double((double) (entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
-            if(facing == 0) {
-                direction = ForgeDirection.NORTH.ordinal();
+        if (Config.debugMode) {
+            if (world.getTileEntity(x,y,z) instanceof TileEntity || world.getBlock(x,y,z) instanceof Block) {
+                int direction;
+                int facing = MathHelper.floor_double((double) (entityLivingBase.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+                if(facing == 0) {
+                    direction = ForgeDirection.NORTH.ordinal();
                     Logger.info(ForgeDirection.NORTH.name());
-            } else if (facing == 1) {
-                direction = ForgeDirection.EAST.ordinal();
+                } else if (facing == 1) {
+                    direction = ForgeDirection.EAST.ordinal();
                     Logger.info(ForgeDirection.EAST.name());
-            } else if (facing == 2) {
-                direction = ForgeDirection.SOUTH.ordinal();
+                } else if (facing == 2) {
+                    direction = ForgeDirection.SOUTH.ordinal();
                     Logger.info(ForgeDirection.SOUTH.name());
-            } else if (facing == 3) {
-                direction = ForgeDirection.WEST.ordinal();
+                } else if (facing == 3) {
+                    direction = ForgeDirection.WEST.ordinal();
                     Logger.info(ForgeDirection.WEST.name());
+                }
             }
-            //((TileEntity)world.getTileEntity(x,y,z));
         }
     }
 

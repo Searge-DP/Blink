@@ -32,14 +32,6 @@ public class ItemBlitzer extends BaseItem {
         }
     }
 
-    private boolean canPlayerFitInTarget(EntityPlayer player,World world, double x, double y, double z) {
-        if (world.isAirBlock((int)x,(int)y,(int)z) && world.isAirBlock((int)x,(int)y+1,(int)z)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
         double posX = player.posX, posY = player.posY, posZ = player.posZ;
@@ -84,9 +76,7 @@ public class ItemBlitzer extends BaseItem {
             }
             if (Config.debugMode) {Logger.info("X: " + (int)posX + " Y: " + posY + " Z: " + (int)posZ);}
             float max = 0.875f, min = 0.325f;
-            if (world.isAirBlock((int)posX,(int)posY+1,(int)posZ) && world.isAirBlock((int)posX,(int)posY+2,(int)posZ)) {
                 player.setPositionAndUpdate(posX, posY, posZ);
-            }
             float pitch = (float) Math.random() * (max - min) + min;
             world.playSoundAtEntity(player, "mob.endermen.portal", 1.0f, pitch);
             ParticleEngine.spawnBlinkParticle((int)posX,(int)posY,(int)posZ, world);
@@ -95,13 +85,11 @@ public class ItemBlitzer extends BaseItem {
     }
 
     @SideOnly(Side.CLIENT)
-    private IIcon BlitzerIcons;
     private IIcon BlitzerActiveIcons;
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister register) {
-        BlitzerIcons = register.registerIcon(TexturePath.TextureLocation + ":" + StringMap.ItemBlitzer);
         BlitzerActiveIcons = register.registerIcon(TexturePath.TextureLocation + ":" + StringMap.ItemBlitzer + "Animation");
     }
 

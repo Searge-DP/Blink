@@ -21,13 +21,6 @@ public class RecipeLoader {
                                 'A', new ItemStack(Items.blaze_rod),
                                 'I', new ItemStack(Items.blaze_powder)});
 
-                GameRegistry.addRecipe(new ItemStack(ItemLoader.Launcher),
-                        new Object[] { "FXF"," I "," I ",
-                                'I', new ItemStack(Items.blaze_rod),
-                                'X', new ItemStack(Items.ender_pearl),
-                                'F', new ItemStack(Items.feather),
-                        });
-
                 GameRegistry.addRecipe(new ItemStack(ItemLoader.EnderCapsule, 2),
                         new Object[] {" X ","XOX"," X ",
                                 'X', new ItemStack(Items.gold_ingot),

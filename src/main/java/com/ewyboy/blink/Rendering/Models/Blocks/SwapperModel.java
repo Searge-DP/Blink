@@ -6,8 +6,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 
-import java.util.Random;
-
 public class SwapperModel extends ModelBase {
     public ModelRenderer Main;
     public ModelRenderer Bottom;
@@ -129,8 +127,6 @@ public class SwapperModel extends ModelBase {
         this.Plate6.render(f5);
         this.Bot3.render(f5);
 
-        Random random = new Random();
-        int RGB = 255;
         GL11.glEnable(GL11.GL_BLEND);
             OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 242, 242);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
