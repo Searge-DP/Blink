@@ -1,13 +1,14 @@
 package com.ewyboy.blink.Blocks;
 
 import com.ewyboy.blink.TileEntities.TileEntitySwapper;
-import com.ewyboy.blink.Utillity.Config;
+import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.ParticleEngine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -15,13 +16,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
+
+    public BlockSwapper() {
+        super(Material.iron);
+        setHardness(3.0f);
+    }
 
     private int defaultFlag = 3;
 
@@ -56,21 +61,13 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
         Block block2 = world.getBlock(iX,iY+1,iZ);
         int block2meta = world.getBlockMetadata(iX,iY+1,iZ);
 
-        ParticleEngine.spawnBlinkParticle(iX,iY+1,iZ,world);
+        ParticleEngine.spawnEnderParticle(iX, iY + 1, iZ, world);
 
         world.setBlock(x,y+1,z,block2, block2meta, defaultFlag);
         world.setBlock(iX,iY+1,iZ,block1, block1meta, defaultFlag);
 
         ParticleEngine.playSound("mob.endermen.portal", world, player, x, y, z, 0.5F, 3.0F);
         return true;
-    }
-
-    @Override
-    public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side) {
-        if(side != -1) {
-            return true;
-        }
-        return false;
     }
 
     @SideOnly(Side.CLIENT)
@@ -115,7 +112,7 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
                 int iX = Integer.parseInt(X),iY = Integer.parseInt(Y), iZ = Integer.parseInt(Z);
                 world.spawnParticle("magicCrit",iX+0.5,iY+1,iZ+0.5,0f,0.25,0f);
             if (player.isSneaking()) {
-                ParticleEngine.spawnBlinkParticle(iX, iY+1, iZ, world);
+                ParticleEngine.spawnEnderParticle(iX, iY + 1, iZ, world);
                 if(!world.isRemote) {
                     boolean test1=false, test2=false, test3=false;
                     for (int i=1; i<=3;i++) {

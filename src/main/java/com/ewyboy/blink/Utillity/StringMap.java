@@ -39,4 +39,5 @@ public class StringMap {
 
     //Strings
     public static final String warn = EnumChatFormatting.RED + "Warning: " + EnumChatFormatting.WHITE;
+    public static final String info = EnumChatFormatting.AQUA + "Info: " + EnumChatFormatting.WHITE;
 }

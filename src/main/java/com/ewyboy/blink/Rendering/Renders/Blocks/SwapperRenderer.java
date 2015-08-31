@@ -79,7 +79,7 @@ public class SwapperRenderer extends TileEntitySpecialRenderer implements IItemR
             GL11.glTranslatef(0.5f,-1.5f,0.5f);
         }
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(StringMap.ID + ":" + "textures/models/SwapperTexture.png"));
-        this.model.render((Entity)null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
+        this.model.render(null, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
     }
 }

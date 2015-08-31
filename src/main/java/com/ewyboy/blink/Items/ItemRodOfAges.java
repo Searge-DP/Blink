@@ -2,8 +2,9 @@ package com.ewyboy.blink.Items;
 
 import com.ewyboy.blink.Loaders.BlockLoader;
 import com.ewyboy.blink.Networking.ClientProxy;
-import com.ewyboy.blink.Utillity.Config;
+import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Utillity.Logger;
+import com.ewyboy.blink.Utillity.ParticleEngine;
 import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -70,7 +71,7 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
 
     @Override
     public boolean showDurabilityBar(ItemStack stack) {
-        return true;
+        return false;
     }
 
     @Override
@@ -80,6 +81,7 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
             if (world.getBlock(x, y + 1, z) == Blocks.air && world.getBlock(x, y + 2, z) == Blocks.air && side == 1) {
                 world.setBlock(x, y + 1, z, BlockLoader.Marker);
                 world.playSoundAtEntity(player, "random.orb", 1.0F, random.nextFloat());
+                ParticleEngine.spawnBlinkParticle(x,y+1,z,world);
             }
         }
         if (!world.isRemote) {
@@ -106,7 +108,7 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
         if (!world.isRemote)
             if (!player.isSneaking()) {
                 if (hasNBTSaved(item)) {
-                    if (canUse(player)) {
+                    //if (canUse(player)) {
                         int x, y, z, dim;
                         NBTTagCompound nbt = item.getTagCompound();
                         //sets pos vars from nbt;
@@ -135,15 +137,15 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
 
                         if (isPlayerInRange && player.dimension == dim && world.getBlock(x, y, z) == BlockLoader.Marker) {
                             float pitch = (float) Math.random() * (max - min) + min;
-                            world.playSoundAtEntity(player, "mob.endermen.portal", 1.0f, pitch);
                             player.fallDistance = 0;
                             player.setPositionAndUpdate(x + 0.5, y + 0.05, z + 0.5);
-                            use(player);
+                            world.playSoundAtEntity(player, "mob.endermen.portal", Config.teleportSoundVolume, pitch);
+                            //use(player);
                         }
                         if (!isPlayerInRange && player.dimension == dim) {
                             player.addChatComponentMessage(new ChatComponentText(StringMap.warn + "You are to far away"));
                         }
-                        if (world.getBlock(x, y, z) != BlockLoader.Marker && player.dimension == dim) {
+                        if (world.getBlock(x,y,z) != BlockLoader.Marker && player.dimension == dim) {
                             player.addChatComponentMessage(new ChatComponentText(StringMap.warn + "Marker not found"));
                         }
                         if (player.dimension != dim) {
@@ -151,7 +153,7 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
                         }
                     }
                 }
-            }
+            //}
         return super.onItemRightClick(item, world, player);
     }
 

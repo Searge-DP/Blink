@@ -18,6 +18,7 @@ import org.lwjgl.opengl.GL11;
 public class RodOfAgesRenderer implements IItemRenderer {
 
     protected RodOfAgesModel model;
+    private float rotate = 0.0f;
 
     public RodOfAgesRenderer() {
         model = new RodOfAgesModel();
@@ -29,6 +30,10 @@ public class RodOfAgesRenderer implements IItemRenderer {
             return true;
         } else if (type.equals(type.EQUIPPED_FIRST_PERSON)) {
             return true;
+        } else if (type.equals(type.INVENTORY)){
+            return true;
+        } else if (type.equals(type.ENTITY)) {
+            return true;
         } else {
             return false;
         }
@@ -36,10 +41,9 @@ public class RodOfAgesRenderer implements IItemRenderer {
 
     @Override
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
-        return helper != ItemRendererHelper.ENTITY_BOBBING && helper != ItemRendererHelper.ENTITY_ROTATION;
+        //return helper != ItemRendererHelper.ENTITY_BOBBING && helper != ItemRendererHelper.ENTITY_ROTATION;
+        return true;
     }
-
-    private float rotate = 0.0f;
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
@@ -66,8 +70,17 @@ public class RodOfAgesRenderer implements IItemRenderer {
             GL11.glPopMatrix();
         } else if (type.equals(type.EQUIPPED)) {
             //Render Third Person later when time
+            GL11.glPushMatrix();
+            GL11.glPopMatrix();
+        } else if (type.equals(type.INVENTORY)) {
+            //Render this later when time
+            GL11.glPushMatrix();
+            GL11.glPopMatrix();
+        } else if (type.equals(type.ENTITY)) {
+            //Render this later when time
+            GL11.glPushMatrix();
+            GL11.glPopMatrix();
         }
-
         GL11.glPushMatrix();
         if(type.equals(type.EQUIPPED)) {
             GL11.glScalef(-2.5f,-2.5f,2.5f);
@@ -81,11 +94,17 @@ public class RodOfAgesRenderer implements IItemRenderer {
                 GL11.glRotatef(15.0f,0.0f,0.0f,0.0f);
             }
             GL11.glTranslatef(-0.2f,-1.0f,0.2f);
-        } else {
-
+        } else if (type.equals(type.ENTITY)){
+            GL11.glRotatef(180f,0.0f,0.0f,1.0f);
+            GL11.glScaled(1.0f,1.0f,1.0f);
+            GL11.glTranslatef(0.0f,-1.3f,0.0f);
+        } else if (type.equals(type.INVENTORY)) {
+            GL11.glRotatef(120f,1.0f,0.0f,0.0f);
+            GL11.glScaled(1.5f,0.9f,1.5f);
+            GL11.glTranslatef(0.0f,-0.5f,0.0f);
         }
         Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(StringMap.ID + ":" + "textures/models/RodOfAgesTexture.png"));
-        this.model.render((Entity)data[1], 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
+        this.model.render((Entity)null, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0625F);
         GL11.glPopMatrix();
     }
 }

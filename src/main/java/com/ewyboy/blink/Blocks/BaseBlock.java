@@ -1,7 +1,7 @@
 package com.ewyboy.blink.Blocks;
 
 import com.ewyboy.blink.Loaders.CreativeTabLoader;
-import com.ewyboy.blink.Utillity.Config;
+import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

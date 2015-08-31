@@ -1,7 +1,6 @@
 package com.ewyboy.blink.Blocks;
 
 import com.ewyboy.blink.Textures.TexturePath;
-import com.ewyboy.blink.Utillity.ParticleEngine;
 import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,8 +11,6 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class BlockMarker extends BaseBlock {
 
@@ -41,11 +38,6 @@ public class BlockMarker extends BaseBlock {
         canBlockStay(world,x,y,z);
     }
 
-    @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-        ParticleEngine.spawnBlinkParticle(x,y,z,world);
-    }
-
     public boolean renderAsNormalBlock() {
         return false;
     }
@@ -71,20 +63,17 @@ public class BlockMarker extends BaseBlock {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerBlockIcons(IIconRegister register)
-    {
+    public void registerBlockIcons(IIconRegister register) {
         TextureIcon = register.registerIcon(TexturePath.TextureLocation + ":" + StringMap.BlockMarker);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int side, int meta) {
-        if (side == 1) {
+        if (side == 1 || side == 0) {
             return TextureIcon;
+        } else {
+            return null;
         }
-        else if (side == 0) {
-            return TextureIcon;
-        }
-        return TextureIcon;
     }
 }

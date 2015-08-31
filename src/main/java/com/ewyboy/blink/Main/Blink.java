@@ -7,7 +7,7 @@ import com.ewyboy.blink.Loaders.RecipeLoader;
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Networking.CommonProxy;
 import com.ewyboy.blink.Loaders.TileEntityLoader;
-import com.ewyboy.blink.Utillity.Config;
+import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.StringMap;
 import com.google.common.base.Stopwatch;

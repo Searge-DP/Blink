@@ -15,7 +15,7 @@ public class CreativeTabLoader {
     };
     //ItemTab
     public static CreativeTabs BlinkItemTab = new CreativeTabs (StringMap.CreativeTabItem) {
-        public ItemStack getIconItemStack() {return new ItemStack(ItemLoader.Blitzer);}
+        public ItemStack getIconItemStack() {return new ItemStack(ItemLoader.RodOfAges);}
         @Override
         public Item getTabIconItem() {return null;}
     };

@@ -2,7 +2,7 @@ package com.ewyboy.blink.Items;
 
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Textures.TexturePath;
-import com.ewyboy.blink.Utillity.Config;
+import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.ParticleEngine;
 import com.ewyboy.blink.Utillity.StringMap;
@@ -23,9 +23,8 @@ public class ItemBlitzer extends BaseItem {
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemstack, EntityPlayer player, List info, boolean useExtraInformation) {
         if (ClientProxy.shiftPressed()) {
-            info.add("Teleport trough 1 block thick walls");
-            info.add("Sneak to go down");
-            info.add("Jump to go up");
+            info.add("Teleport trough 1 block thick walls, floors, roofs");
+            info.add("Simple click the side of the block in the direction you wanna go");
             info.add("Sprinting to go trough 2 block thick walls");
         } else {
             info.add("Press shift to show info");
