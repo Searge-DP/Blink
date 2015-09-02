@@ -10,5 +10,5 @@ item.Launcher.name=Launcher
 item.EnderCapsule.name=Ender Capsule
 
 #Creative Tabs
-itemGroup.Blink Blocks=Blocks
-itemGroup.Blink Items=Items
+itemGroup.Blink Blocks=Blink: Blocks
+itemGroup.Blink Items=Blink: Items
