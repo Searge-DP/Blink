@@ -1,4 +1,4 @@
-#Block
+#Blocks
 tile.Swapper.name=Заменитель
 tile.Marker.name=Маркер
 tile.enderLiquid=Эндер-жидкость
@@ -6,7 +6,6 @@ tile.enderLiquid=Эндер-жидкость
 #Items
 item.RodOfAgesModel.name=Жезл веков
 item.Blitzer.name=Блитцер
-item.Launcher.name=Лаунчер
 item.EnderCapsule.name=Капсула Эндера
 
 #Creative Tabs
