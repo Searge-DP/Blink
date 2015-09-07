@@ -37,7 +37,8 @@ public final class Blink {
                 BlockLoader.loadBlocks();
                 FluidLoader.loadFluids();
                 TileEntityLoader.loadTileEntities();
-                ClientProxy.loadModels();
+                ClientProxy.init();
+                CommonProxy.init();
             Logger.info("PreInitialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms )");
             Logger.info("PreInitialization process successfully done");
     }

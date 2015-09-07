@@ -2,6 +2,8 @@ package com.ewyboy.blink.Rendering.Renders.Blocks;
 
 import com.ewyboy.blink.Rendering.Models.Blocks.SwapperModel;
 import com.ewyboy.blink.Utillity.StringMap;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -15,19 +17,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
+@SideOnly(Side.CLIENT)
 public class SwapperRenderer extends TileEntitySpecialRenderer implements IItemRenderer {
 
     private final SwapperModel model;
 
     public SwapperRenderer() {
         this.model = new SwapperModel();
-    }
-
-    public static void adjustRotatePivotViaMeta(World world, int x, int y, int z) {
-        int meta = world.getBlockMetadata(x, y, z);
-        GL11.glPushMatrix();
-            GL11.glRotatef(meta * (-90), 0.0F, 0.0F, 1.0F);
-        GL11.glPopMatrix();
     }
 
     @Override

@@ -1,17 +1,14 @@
 package com.ewyboy.blink.Items;
 
-import com.ewyboy.blink.Networking.ClientProxy;
-import com.ewyboy.blink.Textures.TexturePath;
 import com.ewyboy.blink.Files.Config;
+import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.ParticleEngine;
-import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -68,33 +65,27 @@ public class ItemBlitzer extends BaseItem {
                         posX = posX + (blink * 2);
                     }
                 }
-            } else if (side==1) {
+            } else if (side==1 && player.posY > 1) {
                 posY = posY - blink * 2;
             } else if (side==0) {
                 posY = posY + blink * 2;
             }
             if (Config.debugMode) {Logger.info("X: " + (int)posX + " Y: " + posY + " Z: " + (int)posZ);}
-            float max = 0.875f, min = 0.325f;
-                player.setPositionAndUpdate(posX, posY, posZ);
-            float pitch = (float) Math.random() * (max - min) + min;
-            world.playSoundAtEntity(player, "mob.endermen.portal", 1.0f, pitch);
-            ParticleEngine.spawnBlinkParticle((int)posX,(int)posY,(int)posZ, world);
+            boolean test1=false, test2=false;
+            for (int i=1; i<=2;i++) {
+                if (world.getBlock((int) posX, (int) posY -1 + i, (int) posZ) == Blocks.air) {
+                    if (i == 1) {test1 = true;}
+                    if (i == 2) {test2 = true;}
+                    if (test1 && test2) {
+                        float max = 0.875f, min = 0.325f;
+                        player.setPositionAndUpdate(posX, posY, posZ);
+                        float pitch = (float) Math.random() * (max - min) + min;
+                        world.playSoundAtEntity(player, "mob.endermen.portal", Config.teleportSoundVolume, pitch);
+                        ParticleEngine.spawnBlinkParticle((int) posX, (int) posY, (int) posZ, world);
+                    }
+                }
+            }
         }
         return false;
-    }
-
-    @SideOnly(Side.CLIENT)
-    private IIcon BlitzerActiveIcons;
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister register) {
-        BlitzerActiveIcons = register.registerIcon(TexturePath.TextureLocation + ":" + StringMap.ItemBlitzer + "Animation");
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIcon getIconFromDamage (int dmg) {
-        return BlitzerActiveIcons;
     }
 }

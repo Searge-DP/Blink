@@ -6,15 +6,15 @@ public class StringMap {
 
     //Networking
     public static final String clientProxyPath = "com.ewyboy.blink.Networking.ClientProxy";
-    public static final String serverProxyPath = "com.ewyboy.blink.Networking.ServerProxy";
+    public static final String serverProxyPath = "com.ewyboy.blink.Networking.CommonProxy";
 
     //Mod info
     public static final String ID = "blink";
     public static final String Name = "Blink";
     public static final String MinecraftVersion = "1.7.10";
-    public static final String VersionMajor = "0";
+    public static final String VersionMajor = "1";
     public static final String VersionMinor = "0";
-    public static final String VersionPatch = "0";
+    public static final String VersionPatch = "4";
     public static final String VersionBuildName = Name + "-" + MinecraftVersion + "-" + VersionMajor + "." + VersionMinor + "." + VersionPatch;
 
     //Blocks

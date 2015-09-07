@@ -1,8 +1,8 @@
 package com.ewyboy.blink.Items;
 
+import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Loaders.BlockLoader;
 import com.ewyboy.blink.Networking.ClientProxy;
-import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Utillity.Logger;
 import com.ewyboy.blink.Utillity.ParticleEngine;
 import com.ewyboy.blink.Utillity.StringMap;
@@ -129,10 +129,10 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
                         } else {
                             isPlayerInRange = false;
                         }
-
-                        Logger.info(isPlayerInRange);
-                        Logger.info("X:" + (player.posX - x) + " Y:" + (player.posY - y) + " Z:" + (player.posZ - z));
-
+                        if (Config.debugMode) {
+                            Logger.info(isPlayerInRange);
+                            Logger.info("X:" + (player.posX - x) + " Y:" + (player.posY - y) + " Z:" + (player.posZ - z));
+                        }
                         float max = 0.2f, min = 0.01f;
 
                         if (isPlayerInRange && player.dimension == dim && world.getBlock(x, y, z) == BlockLoader.Marker) {

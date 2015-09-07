@@ -19,9 +19,8 @@ public class TileEntityLoader {
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("Loading tile entities started");
                 Swapper = new TileEntitySwapper();
-                GameRegistry.registerTileEntity(TileEntitySwapper.class, "TileEntityEMCBank");
-            log(Swapper);
+                    GameRegistry.registerTileEntity(TileEntitySwapper.class, "TileEntitySwapper");
+                        log(Swapper);
         Logger.info("Loading tile entities finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms");
     }
-
 }

@@ -3,6 +3,7 @@ package com.ewyboy.blink.Networking;
 import com.ewyboy.blink.Loaders.BlockLoader;
 import com.ewyboy.blink.Loaders.ItemLoader;
 import com.ewyboy.blink.Rendering.Renders.Blocks.SwapperRenderer;
+import com.ewyboy.blink.Rendering.Renders.Items.BlitzerRenderer;
 import com.ewyboy.blink.Rendering.Renders.Items.RodOfAgesRenderer;
 import com.ewyboy.blink.TileEntities.TileEntitySwapper;
 import com.ewyboy.blink.Utillity.StringMap;
@@ -25,6 +26,7 @@ public class ClientProxy extends CommonProxy {
 
     public static void loadModels() {
         MinecraftForgeClient.registerItemRenderer(ItemLoader.RodOfAges, new RodOfAgesRenderer());
+        MinecraftForgeClient.registerItemRenderer(ItemLoader.Blitzer, new BlitzerRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockLoader.Swapper),new SwapperRenderer());
 
         StringMap.BlockSwapperRenderID = RenderingRegistry.getNextAvailableRenderId();

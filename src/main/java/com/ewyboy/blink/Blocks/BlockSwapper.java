@@ -128,7 +128,7 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
                                 player.setPositionAndUpdate(iX+0.5,iY+1.5,iZ+0.5);
                                 float max = 0.2f, min = 0.01f;
                                 float pitch = (float)Math.random()*(max-min)+min;
-                                world.playSoundAtEntity(player,"mob.endermen.portal",1.0f ,pitch);
+                                world.playSoundAtEntity(player,"mob.endermen.portal",Config.teleportSoundVolume ,pitch);
                             }
                         }
                     }

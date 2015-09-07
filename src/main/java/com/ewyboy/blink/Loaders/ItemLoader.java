@@ -20,7 +20,7 @@ public class ItemLoader {
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("Loading blocks started");
                 Blitzer = new ItemBlitzer().setUnlocalizedName(StringMap.ItemBlitzer);
-                    GameRegistry.registerItem(Blitzer,StringMap.ItemBlitzer);
+                    GameRegistry.registerItem(Blitzer, StringMap.ItemBlitzer);
                         log(Blitzer);
                 RodOfAges = new ItemRodOfAges().setUnlocalizedName(StringMap.ItemRodOfAges);
                     GameRegistry.registerItem(RodOfAges,StringMap.ItemRodOfAges);

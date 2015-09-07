@@ -25,7 +25,7 @@ public class BlockMarker extends BaseBlock {
 
     @Override
     public boolean canBlockStay(World world, int x, int y, int z) {
-        if(world.getBlock(x,y-1,z)== Blocks.air) {
+        if(world.getBlock(x,y-1,z) == Blocks.air) {
             world.setBlockToAir(x,y,z);
             return false;
         } else {
@@ -55,7 +55,7 @@ public class BlockMarker extends BaseBlock {
     }
 
     public boolean isCollidable() {
-        return true;
+        return false;
     }
 
     @SideOnly(Side.CLIENT)

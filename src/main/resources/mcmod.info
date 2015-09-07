@@ -1,16 +1,16 @@
 [
-{
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
-  "version": "${version}",
-  "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
-  "logoFile": "",
-  "screenshots": [],
-  "dependencies": []
-}
+  {
+    "modid": "blink",
+    "name": "Blink,
+    "description": "Release the power of the Endermens as you own!",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "url": "http://minecraft.curseforge.com/mc-mods/235317-blink",
+    "updateUrl": "",
+    "authorList": ["EwyBoy"],
+    "credits": "Jordan aka JorVaCoding for lots of help",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
 ]

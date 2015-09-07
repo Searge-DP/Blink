@@ -66,6 +66,7 @@ public class RodOfAgesModel extends ModelBase {
         this.TopHat.render(f5);
     }
 
+
     public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
         modelRenderer.rotateAngleX = x;
         modelRenderer.rotateAngleY = y;
