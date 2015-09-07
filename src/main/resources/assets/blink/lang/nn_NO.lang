@@ -1,7 +1,7 @@
 #Blocks
 tile.Swapper.name=Omplasserer
 tile.Marker.name=Markør
-tile.enderLiquid=Ender Veske
+tile.enderLiquid=Ender Væske
 
 #Items
 item.RodOfAgesModel.name=Tidenes Septer
