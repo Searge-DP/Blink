@@ -1,10 +1,12 @@
 package com.ewyboy.blink.Loaders;
 
 import com.ewyboy.blink.Utillity.StringMap;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+@GameRegistry.ObjectHolder(StringMap.ID)
 public class CreativeTabLoader {
 
     //BlockTab

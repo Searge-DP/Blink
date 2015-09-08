@@ -4,7 +4,8 @@ import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Loaders.BlockLoader;
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Utillity.Logger;
-import com.ewyboy.blink.Utillity.ParticleEngine;
+import com.ewyboy.blink.Engines.ParticleEngine;
+import com.ewyboy.blink.Engines.SoundEngine;
 import com.ewyboy.blink.Utillity.StringMap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -19,7 +20,6 @@ import net.minecraft.world.World;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 public class ItemRodOfAges extends BaseEnderPoweredItem {
 
@@ -76,12 +76,11 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
 
     @Override
     public boolean onItemUse(ItemStack item, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-        Random random = new Random();
         if (player.isSneaking()) {
             if (world.getBlock(x, y + 1, z) == Blocks.air && world.getBlock(x, y + 2, z) == Blocks.air && side == 1) {
                 world.setBlock(x, y + 1, z, BlockLoader.Marker);
-                world.playSoundAtEntity(player, "random.orb", 1.0F, random.nextFloat());
-                ParticleEngine.spawnBlinkParticle(x,y+1,z,world);
+                SoundEngine.playSoundAtEntity(SoundEngine.dingSound, world, player, 0.01f, 1.0f);
+                ParticleEngine.spawnHelixEffect(world, x, y + 1, z, ParticleEngine.effectPortal, 1);
             }
         }
         if (!world.isRemote) {
@@ -104,7 +103,7 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
     @Override
     public ItemStack onItemRightClick(ItemStack item, World world, EntityPlayer player) {
         int range = Config.rodOfAgesRange;
-        boolean isPlayerInRange = false;
+        boolean isPlayerInRange;
         if (!world.isRemote)
             if (!player.isSneaking()) {
                 if (hasNBTSaved(item)) {
@@ -133,13 +132,10 @@ public class ItemRodOfAges extends BaseEnderPoweredItem {
                             Logger.info(isPlayerInRange);
                             Logger.info("X:" + (player.posX - x) + " Y:" + (player.posY - y) + " Z:" + (player.posZ - z));
                         }
-                        float max = 0.2f, min = 0.01f;
-
-                        if (isPlayerInRange && player.dimension == dim && world.getBlock(x, y, z) == BlockLoader.Marker) {
-                            float pitch = (float) Math.random() * (max - min) + min;
+                        if (isPlayerInRange && player.dimension == dim && world.getBlock(x,y,z) == BlockLoader.Marker) {
                             player.fallDistance = 0;
                             player.setPositionAndUpdate(x + 0.5, y + 0.05, z + 0.5);
-                            world.playSoundAtEntity(player, "mob.endermen.portal", Config.teleportSoundVolume, pitch);
+                            SoundEngine.playSoundAtEntity(SoundEngine.teleportSound, world, player, 0.01f, 0.2f);
                             //use(player);
                         }
                         if (!isPlayerInRange && player.dimension == dim) {

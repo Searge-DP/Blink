@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 
 import java.util.concurrent.TimeUnit;
 
+@GameRegistry.ObjectHolder(StringMap.ID)
 public class BlockLoader {
 
     public static Block Swapper, Marker;

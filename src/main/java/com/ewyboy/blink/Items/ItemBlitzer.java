@@ -3,7 +3,8 @@ package com.ewyboy.blink.Items;
 import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Networking.ClientProxy;
 import com.ewyboy.blink.Utillity.Logger;
-import com.ewyboy.blink.Utillity.ParticleEngine;
+import com.ewyboy.blink.Engines.ParticleEngine;
+import com.ewyboy.blink.Engines.SoundEngine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -77,11 +78,9 @@ public class ItemBlitzer extends BaseItem {
                     if (i == 1) {test1 = true;}
                     if (i == 2) {test2 = true;}
                     if (test1 && test2) {
-                        float max = 0.875f, min = 0.325f;
                         player.setPositionAndUpdate(posX, posY, posZ);
-                        float pitch = (float) Math.random() * (max - min) + min;
-                        world.playSoundAtEntity(player, "mob.endermen.portal", Config.teleportSoundVolume, pitch);
-                        ParticleEngine.spawnBlinkParticle((int) posX, (int) posY, (int) posZ, world);
+                        SoundEngine.playSoundAtEntity(SoundEngine.teleportSound, world, player, 0.325f, 0.875f);
+                        ParticleEngine.spawnHelixEffect(world,(int)posX,(int)posY,(int)posZ,ParticleEngine.effectPortal,1);
                     }
                 }
             }

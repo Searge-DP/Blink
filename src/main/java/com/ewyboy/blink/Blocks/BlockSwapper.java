@@ -3,7 +3,8 @@ package com.ewyboy.blink.Blocks;
 import com.ewyboy.blink.TileEntities.TileEntitySwapper;
 import com.ewyboy.blink.Files.Config;
 import com.ewyboy.blink.Utillity.Logger;
-import com.ewyboy.blink.Utillity.ParticleEngine;
+import com.ewyboy.blink.Engines.ParticleEngine;
+import com.ewyboy.blink.Engines.SoundEngine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -61,12 +62,13 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
         Block block2 = world.getBlock(iX,iY+1,iZ);
         int block2meta = world.getBlockMetadata(iX,iY+1,iZ);
 
-        ParticleEngine.spawnEnderParticle(iX, iY + 1, iZ, world);
+        ParticleEngine.spawnHelixEffect(world,iX,iY+1,iZ,ParticleEngine.effectEnder, 1);
+        ParticleEngine.spawnHelixEffect(world,z,y+1,x,ParticleEngine.effectEnder, 1);
 
-        world.setBlock(x,y+1,z,block2, block2meta, defaultFlag);
-        world.setBlock(iX,iY+1,iZ,block1, block1meta, defaultFlag);
+        world.setBlock(x,y+1,z,block2,block2meta,defaultFlag);
+        world.setBlock(iX,iY+1,iZ,block1,block1meta,defaultFlag);
 
-        ParticleEngine.playSound("mob.endermen.portal", world, player, x, y, z, 0.5F, 3.0F);
+        SoundEngine.playSound(world,iX,iY,iZ, SoundEngine.teleportSound, 0.2f,0.6f);
         return true;
     }
 
@@ -110,9 +112,10 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
                 String[] POS = posString.split(" ");
                 String X=POS[0],Y=POS[1],Z=POS[2];
                 int iX = Integer.parseInt(X),iY = Integer.parseInt(Y), iZ = Integer.parseInt(Z);
-                world.spawnParticle("magicCrit",iX+0.5,iY+1,iZ+0.5,0f,0.25,0f);
+                ParticleEngine.spawnParticle(world,iX,iY+0.5,iZ,ParticleEngine.effectEnder,0f,0.35f,0f);
             if (player.isSneaking()) {
-                ParticleEngine.spawnEnderParticle(iX, iY + 1, iZ, world);
+                ParticleEngine.spawnHelixEffect(world,iX,iY+1,iZ,ParticleEngine.effectEnder,1);
+                ParticleEngine.spawnHelixEffect(world,iX,iY+1,iZ,ParticleEngine.effectEnder,1);
                 if(!world.isRemote) {
                     boolean test1=false, test2=false, test3=false;
                     for (int i=1; i<=3;i++) {
@@ -126,9 +129,7 @@ public class BlockSwapper extends BaseBlock implements ITileEntityProvider {
                             }
                             if(test1&&test2&&test3) {
                                 player.setPositionAndUpdate(iX+0.5,iY+1.5,iZ+0.5);
-                                float max = 0.2f, min = 0.01f;
-                                float pitch = (float)Math.random()*(max-min)+min;
-                                world.playSoundAtEntity(player,"mob.endermen.portal",Config.teleportSoundVolume ,pitch);
+                                SoundEngine.playSoundAtEntity(SoundEngine.teleportSound, world, player, 0.01f, 0.2f);
                             }
                         }
                     }

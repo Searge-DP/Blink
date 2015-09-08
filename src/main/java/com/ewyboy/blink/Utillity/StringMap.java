@@ -14,7 +14,7 @@ public class StringMap {
     public static final String MinecraftVersion = "1.7.10";
     public static final String VersionMajor = "1";
     public static final String VersionMinor = "0";
-    public static final String VersionPatch = "4";
+    public static final String VersionPatch = "5";
     public static final String VersionBuildName = Name + "-" + MinecraftVersion + "-" + VersionMajor + "." + VersionMinor + "." + VersionPatch;
 
     //Blocks

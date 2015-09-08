@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 
 import java.util.concurrent.TimeUnit;
 
+@GameRegistry.ObjectHolder(StringMap.ID)
 public class FluidLoader {
 
     public static Fluid EnderFluid;

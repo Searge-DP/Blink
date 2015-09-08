@@ -29,7 +29,7 @@ public final class Blink {
     public static CommonProxy proxy;
 
     @Mod.EventHandler
-    void preInit (FMLPreInitializationEvent event) {
+    public void preInit (FMLPreInitializationEvent event) {
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("PreInitialization started");
                 Config.init(event.getSuggestedConfigurationFile());
@@ -44,7 +44,7 @@ public final class Blink {
     }
 
     @Mod.EventHandler
-    void init (FMLInitializationEvent event) {
+    public void init (FMLInitializationEvent event) {
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("Initialization started");
             Logger.info("Initialization finished after " + watch.elapsed(TimeUnit.MILLISECONDS) + "ms )");
@@ -52,7 +52,7 @@ public final class Blink {
     }
 
     @Mod.EventHandler
-    void postInit (FMLPreInitializationEvent event){
+    public void postInit (FMLPreInitializationEvent event){
         Stopwatch watch = Stopwatch.createStarted();
             Logger.info("PostInitialization started");
                 RecipeLoader.loadRecipes();
