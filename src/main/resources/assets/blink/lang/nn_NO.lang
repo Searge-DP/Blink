@@ -1,0 +1,13 @@
+#Blocks
+tile.Swapper.name=Omplasserer
+tile.Marker.name=Markør
+tile.enderLiquid=Ender Væske
+
+#Items
+item.RodOfAgesModel.name=Tidenes Septer
+item.Blitzer.name=Blitzer
+item.EnderCapsule.name=Ender Kapsel
+
+#Creative Tabs
+itemGroup.Blink Blocks=Blink: Blokker
+itemGroup.Blink Items=Blink: Ting
