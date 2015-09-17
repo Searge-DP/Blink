@@ -138,16 +138,6 @@ public class BlitzerModel extends ModelBase {
         setRotateAngle(this.shape17,0,0,rotate02);
         setRotateAngle(this.shape18,0,0,rotate01);
 
-        /*setRotateAngle(this.barrel1,0,0,rotate01);
-        setRotateAngle(this.barrel2,0,0,rotate01);
-        setRotateAngle(this.barrel3,0,0,rotate02);
-        setRotateAngle(this.barrel4,0,0,rotate01);
-        setRotateAngle(this.barrel5,0,0,rotate02);
-        setRotateAngle(this.barrel6,0,0,rotate01);
-        setRotateAngle(this.barrel7,0,0,rotate02);
-        setRotateAngle(this.barrel8,0,0,rotate01);
-        setRotateAngle(this.barrel9,0,0,rotate02);*/
-
         GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glColor4f(1.0F, 1.0F, 1.0F, 0.5F);

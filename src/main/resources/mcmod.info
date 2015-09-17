@@ -2,7 +2,7 @@
   {
     "modid": "blink",
     "name": "Blink,
-    "description": "Release the power of the Endermens as you own!",
+    "description": "Release the power of the Endermen as you own!",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "url": "http://minecraft.curseforge.com/mc-mods/235317-blink",
